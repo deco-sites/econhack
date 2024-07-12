@@ -1,4 +1,6 @@
+import { AppContext } from "site/apps/deco/records.ts";
 import { Item } from "site/loaders/itemList.ts";
+import { items } from "site/db/schema.ts";
 
 export interface Props {
   item: Item;
@@ -7,13 +9,8 @@ export interface Props {
 export default async function action(
   props: Props,
   _req: Request,
-  _ctx: unknown,
+  ctx: AppContext,
 ) {
-  return await fetch("http://econhackapi.edurodrigues.dev/items", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(props.item),
-  });
+  const drizzle = await ctx.invoke.records.loaders.drizzle();
+  await drizzle.insert(items).values(props.item);
 }

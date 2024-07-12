@@ -1,24 +1,17 @@
-import { AppContext } from "site/apps/site.ts";
+import { AppContext } from "site/apps/deco/records.ts";
+import { gifts } from "site/db/schema.ts";
 
 export interface Props {
-    itemId: string;
-    username: string;
+  itemUrl: string;
+  username: string;
+  message?: string;
 }
 
 export default async function action(
-    props: Props,
-    _req: Request,
-    ctx: AppContext,
+  props: Props,
+  _req: Request,
+  ctx: AppContext,
 ) {
-    const { itemId, username } = props;
-    await fetch("http://econhackapi.edurodrigues.dev/reservation-by-user", {
-        method: "POST",
-        body: JSON.stringify({
-            itemId,
-            username,
-        }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
+  const drizzle = await ctx.invoke.records.loaders.drizzle();
+  await drizzle.insert(gifts).values(props);
 }
