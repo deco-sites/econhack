@@ -1,0 +1,9 @@
+{
+  "__resolveType": "site/apps/deco/records.ts",
+  "url": "libsql://econhack-decocx.turso.io",
+  "authToken": {
+    "__resolveType": "website/loaders/secret.ts",
+    "name": "DATABASE_AUTH_TOKEN",
+    "encrypted": "e68013dfe16a659c3360cd2331a66b32374866b9a8f12bf9f4870eca2194f7ad731c19f9f3ea7b497555b95576b5ac259a4a96f467edfdacbb350ba15de03d37b6786eaf272c817b2c9ff5772f25a97c3cde1af5693d79000221a9c884b093caf9d1c9e9f1b1b1048402c6e35db9df55f9840b5e187ff639afbe2b2b89b6f9fca491855f1e2430c3fab48024ada71329f461fab068ae87536f177f2875a7f2c01b178b6077dbd59a6debfe66f5763e335ffdb0cd982df8ed9e58d4b36034b8cf9762de9cd545a9eedea1b0fbd108c4e1c7516ca3f3ac71c7e7ef1d18d1184d2d"
+  }
+}
