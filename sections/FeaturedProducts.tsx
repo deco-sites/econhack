@@ -63,7 +63,7 @@ export async function loader(props: Props, _req: Request, ctx: AppContext) {
 
 export default function Section(props: SectionProps<typeof loader>) {
   return (
-    <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max">
+    <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max bg-pink-500">
       {props.products?.map((product, idx) => (
         <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
           {product.item.image

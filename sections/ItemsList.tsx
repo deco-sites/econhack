@@ -9,12 +9,11 @@ interface Props {
 }
 
 export async function loader(props: Props, req: Request, ctx: AppContext) {
-    const items = await ctx.invoke("site/loaders/itemList.ts");
-
     const { itemId, username } = props;
     if (itemId !== undefined || username !== undefined) {
         await ctx.invoke.site.actions.reserveItem({ itemId, username });
     }
+    const items = await ctx.invoke("site/loaders/itemList.ts");
     return { items };
 }
 
@@ -48,23 +47,27 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                 })}
                             </p>
 
-                            <a
-                                href={useSection<Props>({
-                                    props: {
-                                        username: "Gabriel",
-                                        itemId: item.id,
-                                    },
-                                })}
-                                hx-swap="outerHTML"
-                                class={`bg-pink-500 text-white rounded p-2 mt-3 bg-pink text-center ${
-                                    !isReserved
-                                        ? "cursor-pointer"
-                                        : "opacity-70 cursor-default"
-                                }`}
-                                disabled={isReserved}
-                            >
-                                {isReserved ? "Reservado" : "Reservar"}
-                            </a>
+                            <form>
+                                <button
+                                    hx-post={useSection<Props>({
+                                        props: {
+                                            username: "Gabriel",
+                                            itemId: item.id,
+                                        },
+                                    })}
+                                    hx-swap="outerHTML"
+                                    hx-target="closest section"
+                                    hx-trigger="click"
+                                    class={`bg-pink-500 text-white rounded p-2 mt-3 bg-pink text-center ${
+                                        !isReserved
+                                            ? "cursor-pointer"
+                                            : "opacity-70 cursor-default"
+                                    }`}
+                                    disabled={isReserved}
+                                >
+                                    {isReserved ? "Reservado" : "Reservar"}
+                                </button>
+                            </form>
                         </li>
                     );
                 })}
