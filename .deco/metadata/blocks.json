@@ -45,5 +45,9 @@
     "blockType": "apps",
     "__resolveType": "site/apps/deco/htmx.ts"
   },
-  "/.deco/blocks/deco-records.json": null
+  "/.deco/blocks/deco-records.json": null,
+  "/.deco/blocks/Preview%20site%2Fsections%2FUrlList.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/UrlList.tsx"
+  }
 }
