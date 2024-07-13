@@ -11,10 +11,11 @@ import * as $$$1 from "./loaders/itemList.ts";
 import * as $$$2 from "./loaders/vtexProductSearch.ts";
 import * as $$$$$$0 from "./sections/FeaturedProducts.tsx";
 import * as $$$$$$1 from "./sections/Footer.tsx";
-import * as $$$$$$2 from "./sections/ItWorks.tsx";
-import * as $$$$$$3 from "./sections/Login.tsx";
-import * as $$$$$$4 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$5 from "./sections/UrlList.tsx";
+import * as $$$$$$2 from "./sections/Header.tsx";
+import * as $$$$$$3 from "./sections/ItWorks.tsx";
+import * as $$$$$$4 from "./sections/Login.tsx";
+import * as $$$$$$5 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$6 from "./sections/UrlList.tsx";
 
 const manifest = {
   "loaders": {
@@ -25,10 +26,11 @@ const manifest = {
   "sections": {
     "site/sections/FeaturedProducts.tsx": $$$$$$0,
     "site/sections/Footer.tsx": $$$$$$1,
-    "site/sections/ItWorks.tsx": $$$$$$2,
-    "site/sections/Login.tsx": $$$$$$3,
-    "site/sections/Theme/Theme.tsx": $$$$$$4,
-    "site/sections/UrlList.tsx": $$$$$$5,
+    "site/sections/Header.tsx": $$$$$$2,
+    "site/sections/ItWorks.tsx": $$$$$$3,
+    "site/sections/Login.tsx": $$$$$$4,
+    "site/sections/Theme/Theme.tsx": $$$$$$5,
+    "site/sections/UrlList.tsx": $$$$$$6,
   },
   "actions": {
     "site/actions/addItem.ts": $$$$$$$$$0,

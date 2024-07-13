@@ -4,6 +4,7 @@ export interface Item {
   price: number;
   image: string;
   url: string;
+  reservedBy?: string;
 }
 
 export default async function loader(
