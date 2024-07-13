@@ -10,6 +10,7 @@ export default {
     },
     extend: {
       colors: {
+        primary: "#c75e6d",
         pink: {
           500: "#c75e6d",
         },
