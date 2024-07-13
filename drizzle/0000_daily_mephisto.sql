@@ -1,5 +1,8 @@
 CREATE TABLE `products` (
-	`url` text PRIMARY KEY NOT NULL
+	`url` text PRIMARY KEY NOT NULL,
+	`image` text,
+	`name` text,
+	`price` real
 );
 --> statement-breakpoint
 CREATE TABLE `reservations` (
