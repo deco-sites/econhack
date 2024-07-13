@@ -1,5 +1,4 @@
 import type { Item } from "site/loaders/itemList.ts";
-import ReserveButton from "site/islands/reserveButton.tsx";
 import { useSection } from "deco/hooks/useSection.ts";
 import { AppContext } from "site/apps/site.ts";
 
@@ -15,15 +14,12 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
     if (itemId !== undefined || username !== undefined) {
         await ctx.invoke.site.actions.reserveItem({ itemId, username });
     }
-    console.log("PROPS");
-    console.log(props);
-
     return { items };
 }
 
 export default function ItemsList({ items = [] }: { items: Item[] }) {
     return (
-        <div class="flex px-12 py-8 flex flex-col" id="test">
+        <div class="flex px-12 py-8 flex flex-col">
             <h2 class="text-4xl font-bold">
                 Itens
             </h2>
@@ -40,10 +36,6 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                             <h3>{item.name}</h3>
                             <span>{item.price}</span>
 
-                            <ReserveButton
-                                disabled={isReserved}
-                                itemId={item.id}
-                            />
                             <a
                                 href={useSection<Props>({
                                     props: {
@@ -52,11 +44,14 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                     },
                                 })}
                                 hx-swap="outerHTML"
-                                hx-target="#test"
+                                class={`bg-black text-white px-2 py-1 rounded ${
+                                    !isReserved
+                                        ? "cursor-pointer"
+                                        : "opacity-70"
+                                }`}
                             >
-                                Reservar denovo
+                                Reservar
                             </a>
-                            {isReserved && <span>Já reservado</span>}
                         </div>
                     );
                 })}
