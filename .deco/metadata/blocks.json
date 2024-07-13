@@ -51,9 +51,9 @@
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
   },
-  "/.deco/blocks/pages-login-903843.json": {
-    "name": "login",
-    "path": "/login",
+  "/.deco/blocks/pages-teste-819954.json": {
+    "name": "teste",
+    "path": "/teste",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
   },

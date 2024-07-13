@@ -1,12 +1,10 @@
 {
-  "name": "login",
-  "path": "/login",
+  "name": "teste",
+  "path": "/teste",
   "sections": [
     {
-      "__resolveType": "site/sections/Login.tsx"
-    },
-    {
-      "__resolveType": "site/sections/Login.tsx"
+      "__resolveType": "site/sections/Login.tsx",
+      "buttonText": "123"
     }
   ],
   "seo": {
