@@ -18,7 +18,8 @@ import * as $$$$$$3 from "./sections/ItWorks.tsx";
 import * as $$$$$$5 from "./sections/Login.tsx";
 import * as $$$$$$6 from "./sections/MyList.tsx";
 import * as $$$$$$7 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$8 from "./sections/UrlList.tsx";
+import * as $$$$$$8 from "./sections/TitleList.tsx";
+import * as $$$$$$9 from "./sections/UrlList.tsx";
 
 const manifest = {
   "loaders": {
@@ -35,7 +36,8 @@ const manifest = {
     "site/sections/Login.tsx": $$$$$$5,
     "site/sections/MyList.tsx": $$$$$$6,
     "site/sections/Theme/Theme.tsx": $$$$$$7,
-    "site/sections/UrlList.tsx": $$$$$$8,
+    "site/sections/TitleList.tsx": $$$$$$8,
+    "site/sections/UrlList.tsx": $$$$$$9,
   },
   "actions": {
     "site/actions/addItem.ts": $$$$$$$$$0,
