@@ -20,11 +20,8 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 
 export default function ItemsList({ items = [] }: { items: Item[] }) {
     return (
-        <div class="flex px-12 py-8 flex flex-col">
-            <h2 class="text-4xl font-bold">
-                Itens
-            </h2>
-            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max">
+        <div class="flex px-8 pt-6 flex-col justify-end bg-pink-500 min-h-screen">
+            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max bg-white rounded-t-xl p-6">
                 {items.map((item) => {
                     const isReserved = item.reservedBy !== undefined;
                     return (
