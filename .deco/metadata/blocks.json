@@ -51,5 +51,24 @@
     "path": "/itens",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
+<<<<<<< HEAD
+=======
+  },
+  "/.deco/blocks/pages-teste-819954.json": {
+    "name": "teste",
+    "path": "/teste",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Minha%2520lista-775365.json": {
+    "name": "Minha lista",
+    "path": "/minha-lista",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/deco-vtex.json": {
+    "blockType": "apps",
+    "__resolveType": "site/apps/deco/vtex.ts"
+>>>>>>> origin/main
   }
 }
