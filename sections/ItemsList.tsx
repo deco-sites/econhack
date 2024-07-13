@@ -20,15 +20,15 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 
 export default function ItemsList({ items = [] }: { items: Item[] }) {
     return (
-        <div class="flex px-12 py-8 flex flex-col">
-            <h2 class="text-4xl font-bold">
-                Itens
-            </h2>
-            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max">
+        <div class="flex px-8 pt-6 flex-col justify-end items-center bg-pink-500 min-h-screen">
+            <h1 class="text-5xl text-white font-bold">
+                Lista de presentes
+            </h1>
+            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max bg-white rounded-t-xl p-6">
                 {items.map((item) => {
                     const isReserved = item.reservedBy !== undefined;
                     return (
-                        <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
+                        <li class="relative flex flex-col w-48 p-3 rounded shadow-sm">
                             <a href={item.url} target="_blank">
                                 <Image
                                     src={item.image}
@@ -56,10 +56,10 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                     },
                                 })}
                                 hx-swap="outerHTML"
-                                class={`btn btn-primary mt-3 ${
+                                class={`bg-pink-500 text-white rounded p-2 mt-3 bg-pink text-center ${
                                     !isReserved
                                         ? "cursor-pointer"
-                                        : "opacity-70"
+                                        : "opacity-70 cursor-default"
                                 }`}
                                 disabled={isReserved}
                             >
