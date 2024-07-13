@@ -56,5 +56,15 @@
     "path": "/login",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Minha%2520lista-775365.json": {
+    "name": "Minha lista",
+    "path": "/minha-lista",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/deco-vtex.json": {
+    "blockType": "apps",
+    "__resolveType": "site/apps/deco/vtex.ts"
   }
 }
