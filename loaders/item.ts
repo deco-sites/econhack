@@ -1,6 +1,4 @@
-import { AppContext } from "site/apps/deco/records.ts";
-import { items } from "site/db/schema.ts";
-import { eq } from "drizzle-orm";
+import { Item } from "site/loaders/itemList.ts";
 
 export interface Props {
   id: string;
@@ -9,9 +7,12 @@ export interface Props {
 export default async function loader(
   props: Props,
   _req: Request,
-  ctx: AppContext,
+  _ctx: unknown,
 ) {
-  const drizzle = await ctx.invoke.records.loaders.drizzle();
+  const response = await fetch(
+    `http://econhackapi.edurodrigues.dev/item/?id=${props.id}`,
+  )
+    .then((res) => res.json()).catch(() => null);
 
-  return await drizzle.select().from(items).where(eq(items.id, props.id));
+  return response as Item | null;
 }

@@ -5,13 +5,11 @@
 import * as $$$$$$$$$0 from "./actions/addItem.ts";
 import * as $$$$$$$$$1 from "./actions/reserveItem.ts";
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
-import * as $$$$$$$$$$$1 from "./apps/deco/records.ts";
-import * as $$$$$$$$$$$2 from "./apps/deco/vtex.ts";
-import * as $$$$$$$$$$$3 from "./apps/site.ts";
-import * as $$$0 from "./loaders/invitees.ts";
-import * as $$$1 from "./loaders/item.ts";
-import * as $$$2 from "./loaders/itemList.ts";
-import * as $$$3 from "./loaders/vtexProductSearch.ts";
+import * as $$$$$$$$$$$1 from "./apps/deco/vtex.ts";
+import * as $$$$$$$$$$$2 from "./apps/site.ts";
+import * as $$$0 from "./loaders/item.ts";
+import * as $$$1 from "./loaders/itemList.ts";
+import * as $$$2 from "./loaders/vtexProductSearch.ts";
 import * as $$$$$$0 from "./sections/FeaturedProducts.tsx";
 import * as $$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$2 from "./sections/Header.tsx";
@@ -25,10 +23,9 @@ import * as $$$$$$9 from "./sections/UrlList.tsx";
 
 const manifest = {
   "loaders": {
-    "site/loaders/invitees.ts": $$$0,
-    "site/loaders/item.ts": $$$1,
-    "site/loaders/itemList.ts": $$$2,
-    "site/loaders/vtexProductSearch.ts": $$$3,
+    "site/loaders/item.ts": $$$0,
+    "site/loaders/itemList.ts": $$$1,
+    "site/loaders/vtexProductSearch.ts": $$$2,
   },
   "sections": {
     "site/sections/FeaturedProducts.tsx": $$$$$$0,
@@ -48,9 +45,8 @@ const manifest = {
   },
   "apps": {
     "site/apps/deco/htmx.ts": $$$$$$$$$$$0,
-    "site/apps/deco/records.ts": $$$$$$$$$$$1,
-    "site/apps/deco/vtex.ts": $$$$$$$$$$$2,
-    "site/apps/site.ts": $$$$$$$$$$$3,
+    "site/apps/deco/vtex.ts": $$$$$$$$$$$1,
+    "site/apps/site.ts": $$$$$$$$$$$2,
   },
   "name": "site",
   "baseUrl": import.meta.url,
