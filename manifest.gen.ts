@@ -3,8 +3,7 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
-import * as $$$$$$$$$$$1 from "./apps/deco/records.ts";
-import * as $$$$$$$$$$$2 from "./apps/site.ts";
+import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$$$$0 from "./sections/Footer.tsx";
 import * as $$$$$$1 from "./sections/ItWorks.tsx";
 import * as $$$$$$2 from "./sections/Theme/Theme.tsx";
@@ -19,8 +18,7 @@ const manifest = {
   },
   "apps": {
     "site/apps/deco/htmx.ts": $$$$$$$$$$$0,
-    "site/apps/deco/records.ts": $$$$$$$$$$$1,
-    "site/apps/site.ts": $$$$$$$$$$$2,
+    "site/apps/site.ts": $$$$$$$$$$$1,
   },
   "name": "site",
   "baseUrl": import.meta.url,
