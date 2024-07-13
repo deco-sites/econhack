@@ -1,7 +1,7 @@
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { relations } from "drizzle-orm";
 
-export const users = sqliteTable("profiles", {
+export const users = sqliteTable("users", {
   username: text("username").primaryKey(),
   email: text("email"),
 });
