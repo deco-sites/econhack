@@ -3,12 +3,12 @@
   "path": "/",
   "sections": [
     {
+      "__resolveType": "Footer"
+    },
+    {
       "__resolveType": "site/sections/ItWorks.tsx",
       "name": "<p>It Works!</p>",
       "count": 1
-    },
-    {
-      "__resolveType": "Footer"
     }
   ],
   "__resolveType": "website/pages/Page.tsx"

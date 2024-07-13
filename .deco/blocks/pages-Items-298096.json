@@ -1,0 +1,16 @@
+{
+  "name": "Items",
+  "path": "/itens",
+  "sections": [
+    {
+      "__resolveType": "site/sections/ItemsList.tsx",
+      "items": {
+        "__resolveType": "site/loaders/getItems.ts"
+      }
+    }
+  ],
+  "seo": {
+    "__resolveType": "website/sections/Seo/SeoV2.tsx"
+  },
+  "__resolveType": "website/pages/Page.tsx"
+}

@@ -1,10 +1,14 @@
+import ReserveButton from "site/islands/reserveButton.tsx";
+
 interface ItemProps {
     name: string;
     price: number;
     image: string;
+    isReserved: boolean;
+    id: string;
 }
 
-export function Item({ name, price, image }: ItemProps) {
+export function Item({ name, price, image, isReserved, id }: ItemProps) {
     return (
         <div class="flex flex-col">
             <img
@@ -14,9 +18,12 @@ export function Item({ name, price, image }: ItemProps) {
             />
             <h3>{name}</h3>
             <span>{price}</span>
-            <button class="bg-black text-white px-2 py-1 rounded cursor-pointer">
-                Reservar
-            </button>
+
+            <ReserveButton
+                disabled={isReserved}
+                itemId={id}
+            />
+            {isReserved && <span>Já reservado</span>}
         </div>
     );
 }
