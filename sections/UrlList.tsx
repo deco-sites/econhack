@@ -1,6 +1,7 @@
 import { useSection } from "deco/hooks/useSection.ts";
 import { SectionProps } from "deco/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import Modal from "site/components/ui/Modal.tsx";
 
 type Product = {
   productName: string;
@@ -23,17 +24,20 @@ export interface Props {
     image: string;
     url: string;
   }[];
+  unrecognized: string[];
 }
 
-export async function loader(_props: unknown, req: Request, _ctx: unknown) {
+export async function loader(props: Props, req: Request, _ctx: unknown) {
   if (req.headers.get("content-type") !== "application/x-www-form-urlencoded") {
-    return {};
+    return props;
   }
+
+  props.unrecognized = props.unrecognized ?? [];
 
   const form = await req.formData();
   const urls = form.get("urls");
 
-  if (!urls) return {};
+  if (!urls) return props;
 
   const productList = await Promise.all(
     urls.toString().split("\n").map(async (str) => {
@@ -41,7 +45,12 @@ export async function loader(_props: unknown, req: Request, _ctx: unknown) {
 
       const res = await fetch(
         url.origin + `/api/catalog_system/pub/products/search${url.pathname}`,
-      ).then((r) => r.json() as Promise<Product[]>);
+      ).then((r) => r.json() as Promise<Product[]>).catch(() => {
+        props.unrecognized.push(url.href);
+        return [];
+      });
+
+      if (!res.length) return;
 
       const [product] = res;
 
@@ -54,7 +63,7 @@ export async function loader(_props: unknown, req: Request, _ctx: unknown) {
     }) ?? [],
   );
 
-  return { productList };
+  return { ...props, productList: productList.filter(Boolean) } as Props;
 }
 
 export default function UrlList(props: SectionProps<typeof loader>) {
@@ -99,6 +108,25 @@ export default function UrlList(props: SectionProps<typeof loader>) {
               </li>
             ))}
           </ul>
+        )
+        : null}
+      {props.unrecognized?.length
+        ? (
+          <Modal open={true} class="bg-base">
+            <form>
+              <h2>Nao foi possivel extrair os dados</h2>
+              <a href={props.unrecognized[0]} target="_blank" class="underline">
+                {new URL(props.unrecognized[0]).host}...
+              </a>
+              <div class="flex gap-2">
+                <input name="image" type="text" placeholder="Imagem" />
+                <input name="name" type="text" placeholder="Nome" />
+                <input name="price" type="text" placeholder="Preço" />
+              </div>
+              <button type="submit">Salvar</button>
+              <button type="button">Pular</button>
+            </form>
+          </Modal>
         )
         : null}
     </div>
