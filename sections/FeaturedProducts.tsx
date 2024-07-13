@@ -37,9 +37,11 @@ export async function loader(props: Props, _req: Request, ctx: AppContext) {
   }
 
   if (props.domain) {
-    const res = await ctx.invoke.site.loaders.vtexProductSearch({
+    let res = await ctx.invoke.site.loaders.vtexProductSearch({
       domain: props.domain,
     });
+
+    res = res.splice(0, 8);
 
     const products = await Promise.all(res.map(async (r) => {
       const item = toItem(r, r.items[0]);
