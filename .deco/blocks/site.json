@@ -29,7 +29,7 @@
   "__resolveType": "site/apps/site.ts",
   "firstByteThresholdMS": false,
   "theme": {
-    "__resolveType": "Neutral"
+    "__resolveType": "Site theme"
   },
   "abTesting": {
     "replaces": [],

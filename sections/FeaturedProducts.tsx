@@ -63,60 +63,62 @@ export async function loader(props: Props, _req: Request, ctx: AppContext) {
 
 export default function Section(props: SectionProps<typeof loader>) {
   return (
-    <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max">
-      {props.products?.map((product, idx) => (
-        <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
-          {product.item.image
-            ? (
-              <a href={product.item.url} target="_blank">
-                <Image
-                  src={product.item.image ?? ""}
-                  width={248}
-                  height={248}
-                  class="mx-auto mb-3"
-                />
-              </a>
-            )
-            : null}
-          <span class="text-ellipsis whitespace-nowrap text-left overflow-hidden text-xs">
-            {product.item.name}
-          </span>
-          <p class="font-bold text-sm">
-            {product.item.price.toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </p>
-          <button
-            class="btn btn-primary mt-3"
-            hx-post={useSection<typeof Section>({
-              props: { ...props, idx },
-            })}
-            hx-trigger="click"
-            hx-target="closest section"
-            hx-swap="outerHTML"
-            disabled={product.inList}
-          >
-            <span class="hidden loading loading-spinner loading-xs [.htmx-request_&]:inline " />
-            <span class="[.html-request_&]:hidden inline">
-              {product.inList ? "Adicionado" : "Adicionar à lista"}
+    <div class="bg-primary min-h-screen flex flex-col justify-end">
+      <ul class="gap-3 mx-auto grid grid-cols-4 w-max bg-base-200 pt-6 px-6 rounded-t-xl">
+        {props.products?.map((product, idx) => (
+          <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
+            {product.item.image
+              ? (
+                <a href={product.item.url} target="_blank">
+                  <Image
+                    src={product.item.image ?? ""}
+                    width={248}
+                    height={248}
+                    class="mx-auto mb-3"
+                  />
+                </a>
+              )
+              : null}
+            <span class="text-ellipsis whitespace-nowrap text-left overflow-hidden text-xs">
+              {product.item.name}
             </span>
-          </button>
-          {product.inList && (
+            <p class="font-bold text-sm">
+              {product.item.price.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </p>
             <button
-              class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black"
+              class="btn btn-secondary mt-3"
               hx-post={useSection<typeof Section>({
                 props: { ...props, idx },
               })}
               hx-trigger="click"
               hx-target="closest section"
               hx-swap="outerHTML"
+              disabled={product.inList}
             >
-              <Icon id="Trash" width={20} height={20} />
+              <span class="hidden loading loading-spinner loading-xs [.htmx-request_&]:inline " />
+              <span class="[.html-request_&]:hidden inline">
+                {product.inList ? "Adicionado" : "Adicionar à lista"}
+              </span>
             </button>
-          )}
-        </li>
-      ))}
-    </ul>
+            {product.inList && (
+              <button
+                class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black"
+                hx-post={useSection<typeof Section>({
+                  props: { ...props, idx },
+                })}
+                hx-trigger="click"
+                hx-target="closest section"
+                hx-swap="outerHTML"
+              >
+                <Icon id="Trash" width={20} height={20} />
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
