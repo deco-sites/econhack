@@ -1,11 +1,11 @@
 {
-  "name": "Items",
+  "name": "Items new",
   "path": "/itens",
   "sections": [
     {
       "__resolveType": "site/sections/ItemsList.tsx",
       "items": {
-        "__resolveType": "site/loaders/getItems.ts"
+        "__resolveType": "site/loaders/itemList.ts"
       }
     }
   ],

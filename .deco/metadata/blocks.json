@@ -46,8 +46,8 @@
     "__resolveType": "site/apps/deco/htmx.ts"
   },
   "/.deco/blocks/deco-records.json": null,
-  "/.deco/blocks/pages-Items-298096.json": {
-    "name": "Items",
+  "/.deco/blocks/pages-Items%2520new-258362.json": {
+    "name": "Items new",
     "path": "/itens",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"

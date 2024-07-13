@@ -2,10 +2,12 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $$$$$$$$$0 from "./actions/addItem.ts";
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$1 from "./apps/deco/vtex.ts";
 import * as $$$$$$$$$$$2 from "./apps/site.ts";
-import * as $$$0 from "./loaders/getItems.ts";
+import * as $$$0 from "./loaders/item.ts";
+import * as $$$1 from "./loaders/itemList.ts";
 import * as $$$$$$0 from "./sections/FeaturedProducts.tsx";
 import * as $$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$3 from "./sections/ItemsList.tsx";
@@ -16,7 +18,8 @@ import * as $$$$$$6 from "./sections/UrlList.tsx";
 
 const manifest = {
   "loaders": {
-    "site/loaders/getItems.ts": $$$0,
+    "site/loaders/item.ts": $$$0,
+    "site/loaders/itemList.ts": $$$1,
   },
   "sections": {
     "site/sections/FeaturedProducts.tsx": $$$$$$0,
@@ -26,6 +29,9 @@ const manifest = {
     "site/sections/Login.tsx": $$$$$$4,
     "site/sections/Theme/Theme.tsx": $$$$$$5,
     "site/sections/UrlList.tsx": $$$$$$6,
+  },
+  "actions": {
+    "site/actions/addItem.ts": $$$$$$$$$0,
   },
   "apps": {
     "site/apps/deco/htmx.ts": $$$$$$$$$$$0,
