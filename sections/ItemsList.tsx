@@ -58,7 +58,7 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                     hx-swap="outerHTML"
                                     hx-target="closest section"
                                     hx-trigger="click"
-                                    class={`btn btn-secondary mt-3 text-center w-full ${
+                                    class={`btn btn-primary mt-3 text-center w-full ${
                                         !isReserved
                                             ? "cursor-pointer"
                                             : "opacity-70 cursor-default"
