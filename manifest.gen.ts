@@ -8,6 +8,7 @@ import * as $$$$$$$$$$$1 from "./apps/deco/vtex.ts";
 import * as $$$$$$$$$$$2 from "./apps/site.ts";
 import * as $$$0 from "./loaders/item.ts";
 import * as $$$1 from "./loaders/itemList.ts";
+import * as $$$2 from "./loaders/vtexProductSearch.ts";
 import * as $$$$$$0 from "./sections/FeaturedProducts.tsx";
 import * as $$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$2 from "./sections/ItWorks.tsx";
@@ -19,6 +20,7 @@ const manifest = {
   "loaders": {
     "site/loaders/item.ts": $$$0,
     "site/loaders/itemList.ts": $$$1,
+    "site/loaders/vtexProductSearch.ts": $$$2,
   },
   "sections": {
     "site/sections/FeaturedProducts.tsx": $$$$$$0,

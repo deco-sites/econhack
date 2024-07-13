@@ -11,6 +11,9 @@ export default async function action(
 ) {
   return await fetch("http://econhackapi.edurodrigues.dev/items", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(props.item),
   });
 }

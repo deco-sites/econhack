@@ -4,38 +4,42 @@ import { useSection } from "deco/hooks/useSection.ts";
 import { AppContext } from "site/apps/site.ts";
 import { toItem } from "site/utils/transform.ts";
 import { Item } from "site/loaders/itemList.ts";
+import Icon from "site/components/ui/Icon.tsx";
 
 export interface Props {
   domain: string;
+
+  /**
+   * @hide
+   */
   products?: { item: Item; inList: boolean }[];
+
+  /**
+   * @hide
+   */
+  idx?: number;
 }
 
-export async function loader(props: Props, req: Request, ctx: AppContext) {
-  const idx = new URL(req.url).searchParams.get("index") ?? "";
-  console.log({ props });
-
-  if (idx && props.products?.length) {
-    const product = props.products[Number(idx)];
+export async function loader(props: Props, _req: Request, ctx: AppContext) {
+  if (props.idx && props.products?.length) {
+    const product = props.products[props.idx];
 
     if (!product) {
       throw new Error("Product not found");
     }
 
     product.inList = true;
-    ctx.invoke.site.actions.addItem({
+    await ctx.invoke.site.actions.addItem({
       item: product.item,
     });
-
-    console.log("add item");
-    console.log({ product });
 
     return props;
   }
 
   if (props.domain) {
-    const res: any[] = await fetch(
-      `${props.domain}/api/catalog_system/pub/products/search`,
-    ).then((res) => res.json());
+    const res = await ctx.invoke.site.loaders.vtexProductSearch({
+      domain: props.domain,
+    });
 
     const products = await Promise.all(res.map(async (r) => {
       const item = toItem(r, r.items[0]);
@@ -55,12 +59,11 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
   return { ...props, products: [] };
 }
 
-export default function FeaturedProducts(props: SectionProps<typeof loader>) {
+export default function Section(props: SectionProps<typeof loader>) {
   return (
     <ul class="flex gap-3 w-full flex-wrap">
       {props.products?.map((product, idx) => (
-        <li class="flex flex-col w-48 p-3 border border-gray-200 rounded">
-          <input type="hidden" name="index" value={idx} />
+        <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
           {product.item.image
             ? (
               <a href={product.item.url} target="_blank">
@@ -84,13 +87,32 @@ export default function FeaturedProducts(props: SectionProps<typeof loader>) {
           </p>
           <button
             class="btn btn-primary mt-3"
-            hx-post={useSection({ props })}
+            hx-post={useSection<typeof Section>({
+              props: { ...props, idx },
+            })}
+            hx-trigger="click"
             hx-target="closest section"
             hx-swap="outerHTML"
-            hx-trigger="click"
+            disabled={product.inList}
           >
-            {product.inList ? "Adicionado" : "Adicionar à lista"}
+            <span class="hidden loading loading-spinner loading-xs [.htmx-request_&]:inline " />
+            <span class="[.html-request_&]:hidden inline">
+              {product.inList ? "Adicionado" : "Adicionar à lista"}
+            </span>
           </button>
+          {product.inList && (
+            <button
+              class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black"
+              hx-post={useSection<typeof Section>({
+                props: { ...props, idx },
+              })}
+              hx-trigger="click"
+              hx-target="closest section"
+              hx-swap="outerHTML"
+            >
+              <Icon id="Trash" width={20} height={20} />
+            </button>
+          )}
         </li>
       ))}
     </ul>
