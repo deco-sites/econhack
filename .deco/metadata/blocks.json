@@ -51,8 +51,6 @@
     "path": "/itens",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
-<<<<<<< HEAD
-=======
   },
   "/.deco/blocks/pages-teste-819954.json": {
     "name": "teste",
@@ -69,6 +67,5 @@
   "/.deco/blocks/deco-vtex.json": {
     "blockType": "apps",
     "__resolveType": "site/apps/deco/vtex.ts"
->>>>>>> origin/main
   }
 }
