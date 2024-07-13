@@ -4,6 +4,9 @@
   "sections": [
     {
       "__resolveType": "site/sections/Login.tsx"
+    },
+    {
+      "__resolveType": "site/sections/Login.tsx"
     }
   ],
   "seo": {
