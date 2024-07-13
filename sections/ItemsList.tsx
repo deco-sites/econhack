@@ -19,11 +19,11 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 
 export default function ItemsList({ items = [] }: { items: Item[] }) {
     return (
-        <div class="flex px-8 pt-6 flex-col justify-end items-center bg-pink-500 min-h-screen">
+        <div class="flex px-8 pt-6 flex-col justify-end items-center bg-primary min-h-screen">
             <h1 class="text-5xl text-white font-bold">
                 Lista de presentes
             </h1>
-            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max bg-white rounded-t-xl p-6">
+            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max bg-base-200 rounded-t-xl p-6">
                 {items.map((item) => {
                     const isReserved = item.reservedBy !== undefined;
                     return (
@@ -58,7 +58,7 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                     hx-swap="outerHTML"
                                     hx-target="closest section"
                                     hx-trigger="click"
-                                    class={`bg-pink-500 text-white rounded p-2 mt-3 bg-pink text-center ${
+                                    class={`btn btn-secondary mt-3 text-center w-full ${
                                         !isReserved
                                             ? "cursor-pointer"
                                             : "opacity-70 cursor-default"
