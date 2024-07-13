@@ -3,6 +3,14 @@
   "path": "/minha-lista",
   "sections": [
     {
+      "__resolveType": "site/sections/TitleList.tsx",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/b16e8be5-36d3-4389-a7dc-3584c8e29959",
+      "title": "Cellar vinhos",
+      "description": "Variedade de vinhos",
+      "colorTitle": "#2d2f6c",
+      "colorDescription": "2D2F6C"
+    },
+    {
       "__resolveType": "site/sections/FeaturedProducts.tsx",
       "domain": "https://cellarvinhos.com.br"
     }
