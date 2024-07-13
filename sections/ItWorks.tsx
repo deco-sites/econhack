@@ -52,7 +52,7 @@ export default function Section({ name = "It Works!", count = 0 }: Props) {
             class="btn btn-sm btn-circle btn-outline no-animation"
           >
             <span class="inline [.htmx-request_&]:hidden">
-              +
+              + teste resolvendo
             </span>
             <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
           </button>
