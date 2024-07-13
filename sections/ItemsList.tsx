@@ -1,6 +1,7 @@
 import type { Item } from "site/loaders/itemList.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { AppContext } from "site/apps/site.ts";
+import Image from "apps/website/components/Image.tsx";
 
 interface Props {
     itemId?: string;
@@ -23,18 +24,29 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
             <h2 class="text-4xl font-bold">
                 Itens
             </h2>
-            <div class="flex gap-4 mt-4">
+            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max">
                 {items.map((item) => {
                     const isReserved = item.reservedBy !== undefined;
                     return (
-                        <div class="flex flex-col">
-                            <img
-                                src={item.image}
-                                alt="Imagem do produto"
-                                class="w-full h-auto"
-                            />
-                            <h3>{item.name}</h3>
-                            <span>{item.price}</span>
+                        <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
+                            <a href={item.url} target="_blank">
+                                <Image
+                                    src={item.image}
+                                    alt="Imagem do produto"
+                                    width={248}
+                                    height={248}
+                                    class="mx-auto mb-3"
+                                />
+                            </a>
+                            <span class="text-ellipsis whitespace-nowrap text-left overflow-hidden text-xs">
+                                {item.name}
+                            </span>
+                            <p class="font-bold text-sm">
+                                {item.price.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                })}
+                            </p>
 
                             <a
                                 href={useSection<Props>({
@@ -44,18 +56,19 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                     },
                                 })}
                                 hx-swap="outerHTML"
-                                class={`bg-black text-white px-2 py-1 rounded ${
+                                class={`btn btn-primary mt-3 ${
                                     !isReserved
                                         ? "cursor-pointer"
                                         : "opacity-70"
                                 }`}
+                                disabled={isReserved}
                             >
-                                Reservar
+                                {isReserved ? "Reservado" : "Reservar"}
                             </a>
-                        </div>
+                        </li>
                     );
                 })}
-            </div>
+            </ul>
         </div>
     );
 }
