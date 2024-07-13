@@ -1,4 +1,4 @@
-import { sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { relations } from "drizzle-orm";
 
 export const users = sqliteTable("users", {
@@ -8,6 +8,9 @@ export const users = sqliteTable("users", {
 
 export const products = sqliteTable("products", {
   url: text("url").primaryKey(),
+  image: text("image"),
+  name: text("name"),
+  price: real("price"),
 });
 
 export const reservations = sqliteTable("reservations", {
