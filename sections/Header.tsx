@@ -1,14 +1,10 @@
 import { useSection } from "deco/hooks/useSection.ts";
 import Modal from "site/components/ui/Modal.tsx";
-import { Item } from "site/loaders/itemList.ts";
-import { SectionProps } from "deco/types.ts";
-import Image from "apps/website/components/Image.tsx";
-import Icon from "site/components/ui/Icon.tsx";
 import { Section } from "deco/blocks/section.ts";
 
 export interface Props {
   openList?: boolean;
-  ItemList: Section;
+  itemList: Section;
 }
 
 export default function Section(props: Props) {
@@ -23,7 +19,7 @@ export default function Section(props: Props) {
       </button>
       <Modal open={props.openList}>
         <h3>Sua lista</h3>
-        <ItemList itemList={props.itemList} />
+        <props.itemList.Component {...props.itemList.props} />
       </Modal>
     </header>
   );
