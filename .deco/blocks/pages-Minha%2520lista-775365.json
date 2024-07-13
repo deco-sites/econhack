@@ -6,7 +6,9 @@
       "__resolveType": "site/sections/Header.tsx",
       "itemList": {
         "__resolveType": "site/sections/MyList.tsx",
-        "itemList": []
+        "itemList": {
+          "__resolveType": "site/loaders/itemList.ts"
+        }
       }
     },
     {
