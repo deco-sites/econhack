@@ -45,11 +45,14 @@
     "blockType": "apps",
     "__resolveType": "site/apps/deco/htmx.ts"
   },
-  "/.deco/blocks/pages-My%2520New%2520Page-217666.json": {
-    "name": "My New Page",
-    "path": "/example-path",
+  "/.deco/blocks/deco-records.json": null,
+  "/.deco/blocks/pages-Items%2520new-258362.json": {
+    "name": "Items new",
+    "path": "/itens",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
+<<<<<<< HEAD
+=======
   },
   "/.deco/blocks/pages-teste-819954.json": {
     "name": "teste",
@@ -66,5 +69,6 @@
   "/.deco/blocks/deco-vtex.json": {
     "blockType": "apps",
     "__resolveType": "site/apps/deco/vtex.ts"
+>>>>>>> origin/main
   }
 }
