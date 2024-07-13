@@ -46,8 +46,10 @@
     "__resolveType": "site/apps/deco/htmx.ts"
   },
   "/.deco/blocks/deco-records.json": null,
-  "/.deco/blocks/Preview%20site%2Fsections%2FUrlList.tsx.json": {
-    "blockType": "sections",
-    "__resolveType": "site/sections/UrlList.tsx"
+  "/.deco/blocks/pages-login-533025.json": {
+    "name": "login",
+    "path": "/login",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
   }
 }
