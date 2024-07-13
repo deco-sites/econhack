@@ -3,10 +3,7 @@
   "path": "/itens",
   "sections": [
     {
-      "__resolveType": "site/sections/ItemsList.tsx",
-      "items": {
-        "__resolveType": "site/loaders/itemList.ts"
-      }
+      "__resolveType": "site/sections/ItemsList.tsx"
     }
   ],
   "seo": {
