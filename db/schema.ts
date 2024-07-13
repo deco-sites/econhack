@@ -1,14 +1,28 @@
+import { sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { relations } from "drizzle-orm";
 
-/**
-* The code snippet below is an example.
-*/
-
-/**
-* import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-
-export const profiles = sqliteTable("profiles", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  name: text("name"),
+export const users = sqliteTable("profiles", {
+  username: text("username").primaryKey(),
   email: text("email"),
 });
-*/
+
+export const products = sqliteTable("products", {
+  url: text("url").primaryKey(),
+});
+
+export const reservations = sqliteTable("reservations", {
+  message: text("message"),
+  username: text("username"),
+  productUrl: text("productUrl"),
+});
+
+export const usersRelations = relations(users, ({ many }) => ({
+  reservations: many(reservations),
+}));
+
+export const reservationsRelations = relations(reservations, ({ one }) => ({
+  user: one(users, {
+    fields: [reservations.username],
+    references: [users.username],
+  }),
+}));
