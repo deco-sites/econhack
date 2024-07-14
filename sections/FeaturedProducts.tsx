@@ -6,6 +6,7 @@ import { toItem } from "site/utils/transform.ts";
 import { Item } from "site/loaders/itemList.ts";
 import Icon from "site/components/ui/Icon.tsx";
 import { ImageWidget } from "apps/admin/widgets.ts";
+import { useId } from "site/sdk/useId.ts";
 
 /**
  * @title {{{name}}}
@@ -74,13 +75,47 @@ export async function loader(props: Props, _req: Request, ctx: AppContext) {
 }
 
 export default function Section(props: SectionProps<typeof loader>) {
+  const id = useId();
   const state = props.state ?? {};
 
   return (
     <div class="bg-primary min-h-screen flex flex-col justify-end">
-      <ul class="gap-3 mx-auto grid grid-cols-4 w-max bg-base-200 pt-6 px-6 rounded-t-xl">
+      <ul class="bg-white rounded-xl mb-3 mx-auto flex flex-wrap gap-3">
+        {props.stores.map((store, idx) => (
+          <li>
+            <button
+              class="btn rounded-xl w-32 h-24 opacity-50 hover:opacity-100 disabled:opacity-100 transition-all relative border-none"
+              style={{ background: "transparent" }}
+              hx-post={useSection<typeof Section>({
+                props: { ...props, state: { storeIdx: idx } },
+              })}
+              hx-trigger="click"
+              hx-target="closest section"
+              hx-swap="outerHTML"
+              disabled={state.storeIdx === idx}
+            >
+              <Image
+                src={store.logo}
+                width={128}
+                class="mx-auto inline [.htmx-request_&]:hidden"
+              />
+              <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
+            </button>
+          </li>
+        ))}
+      </ul>
+      <ul
+        class="gap-3 mx-auto grid grid-cols-4 w-max bg-base-200 pt-6 px-6 rounded-t-xl"
+        id={id}
+      >
+        {/* Skeleton */}
+        {[...Array(8)].map(() => (
+          <div class="skeleton w-48 h-[300px] rounded bg-gray-100 hidden [.htmx-request_&]:block">
+          </div>
+        ))}
+        {/* Content */}
         {state.products?.map((product, idx) => (
-          <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
+          <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded [.htmx-request_&]:hidden">
             {product.item.image
               ? (
                 <a href={product.item.url} target="_blank">

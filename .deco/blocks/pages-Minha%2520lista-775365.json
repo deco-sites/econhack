@@ -18,6 +18,11 @@
           "logo": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/9c341c74-f7e6-43b9-9113-f3bf700425eb",
           "name": "Cellar Vinhos",
           "url": "https://cellarvinhos.com.br"
+        },
+        {
+          "logo": "https://shopcasacosta.vtexassets.com/assets/vtex/assets-builder/shopcasacosta.store-theme/1.0.41/img/logo___c7ebfe0aa4e82fed5de1f371b3a3ef6f.png",
+          "name": "Casa Costa",
+          "url": "https://www.shopcasacosta.com.br/"
         }
       ]
     }
