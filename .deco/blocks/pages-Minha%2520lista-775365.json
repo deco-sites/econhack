@@ -3,6 +3,9 @@
   "path": "/minha-lista",
   "sections": [
     {
+      "__resolveType": "Header"
+    },
+    {
       "__resolveType": "site/sections/FeaturedProducts.tsx",
       "domain": "https://cellarvinhos.com.br",
       "stores": [
