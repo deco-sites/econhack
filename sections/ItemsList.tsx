@@ -11,8 +11,15 @@ export interface Props {
 }
 
 export async function loader(props: Props, req: Request, ctx: AppContext) {
+  const url = new URL(req.url);
+  const userId = url.searchParams.get("user");
+  if (userId) {
+    // It should be something global, but it works for the hackathon delivery.
+    ctx.response.headers.set("Set-Cookie", `user=${userId}`);
+  }
+
   const user = await ctx.invoke.site.loaders.authenticatedUser();
-  const itemId = new URL(req.url).searchParams.get("itemId");
+  const itemId = url.searchParams.get("itemId");
 
   if (itemId && user) {
     await ctx.invoke.site.actions.reserveItem({
@@ -92,7 +99,10 @@ export default function ItemsList(props: Props) {
               <p class="text-center mt-3">
                 Agora, basta entrar no site e comprar o produto.
               </p>
-              <a href={props.gifted.url} class="flex flex-col items-center mt-6">
+              <a
+                href={props.gifted.url}
+                class="flex flex-col items-center mt-6"
+              >
                 <Image src={props.gifted.image} width={128} height={128} />
                 <span class="btn btn-primary w-full mt-3">Comprar</span>
               </a>

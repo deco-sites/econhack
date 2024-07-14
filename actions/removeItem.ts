@@ -7,7 +7,6 @@ export default async function action(
   _req: Request,
   _ctx: unknown,
 ) {
-  console.log({ props })
   return await fetch(
     "http://econhackapi.edurodrigues.dev/item?itemId=" + props.id,
     { method: "DELETE" },

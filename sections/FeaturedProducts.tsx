@@ -66,7 +66,6 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
         item: product.item,
       });
 
-      console.log({ props });
       return props;
     }
   }
