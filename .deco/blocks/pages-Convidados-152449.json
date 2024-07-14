@@ -8,7 +8,7 @@
     {
       "__resolveType": "site/sections/Invitations.tsx",
       "invitees": {
-        "__resolveType": "site/loaders/invitees.ts"
+        "__resolveType": "site/loaders/invitees-and-gifts.ts"
       }
     }
   ],
