@@ -34,8 +34,11 @@ export interface Props {
 export async function loader(props: Props, req: Request, ctx: AppContext) {
   const state = props.state ?? { storeIdx: 0 };
 
-  state.storeIdx = Number(new URL(req.url).searchParams.get("s"));
-  if (isNaN(state.storeIdx) || !state.storeIdx) state.storeIdx = 0;
+  const s = new URL(req.url).searchParams.get("s");
+  if (s) {
+    const n = Number(s);
+    if (!isNaN(n)) state.storeIdx = n;
+  }
 
   if (state.products?.length) {
     const url = new URL(req.url);
@@ -47,7 +50,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
       throw new Error("Product not found");
     }
 
-    const action = url.searchParams.get("action")
+    const action = url.searchParams.get("action");
     if (action === "remove") {
       product.inList = false;
       await ctx.invoke.site.actions.removeItem({
@@ -63,6 +66,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
         item: product.item,
       });
 
+      console.log({ props });
       return props;
     }
   }
@@ -152,7 +156,6 @@ export default function Section(props: SectionProps<typeof loader>) {
               style={{ background: "transparent" }}
               hx-get={useSection<typeof Section>({
                 href: "?s=" + idx,
-                props: { stores: props.stores },
               })}
               hx-trigger="click"
               hx-target="closest section"
@@ -219,7 +222,7 @@ export default function Section(props: SectionProps<typeof loader>) {
               <button
                 class="btn btn-secondary mt-3"
                 hx-post={useSection({
-                  props: { ...props, state: { ...state, idx } },
+                  props,
                   href: `?action=add&idx=${idx}`,
                 })}
                 hx-trigger="click"
@@ -236,6 +239,7 @@ export default function Section(props: SectionProps<typeof loader>) {
                 <button
                   class="absolute top-0 right-0 w-6 h-6 flex items-center justify-center p-1 bg-white rounded-full shadow-black [.htmx-request_&]:disabled"
                   hx-post={useSection({
+                    props,
                     href: `?action=remove&idx=${idx}`,
                   })}
                   hx-trigger="click"
