@@ -216,7 +216,13 @@ export default function InvitationsSection(props: Props) {
           <p>Ou suba uma lista de convidados:</p>
           <div class="flex gap-3 mx-auto justify-center">
             <input type="file" class="input" name="lista" />
-            <button class="btn btn-primary w-24">Enviar</button>
+            <button class="btn btn-primary w-24">
+              <span class="inline [.htmx-request_&]:hidden">
+                Enviar
+              </span>
+              <span class="w-4 h-4 loading loading-spinner hidden [.htmx-request_&]:inline">
+              </span>
+            </button>
           </div>
         </form>
       </div>
