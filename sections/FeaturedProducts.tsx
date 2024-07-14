@@ -5,24 +5,35 @@ import { AppContext } from "site/apps/site.ts";
 import { toItem } from "site/utils/transform.ts";
 import { Item } from "site/loaders/itemList.ts";
 import Icon from "site/components/ui/Icon.tsx";
+import { ImageWidget } from "apps/admin/widgets.ts";
+
+/**
+ * @title {{{name}}}
+ */
+interface Store {
+  logo: ImageWidget;
+  name: string;
+  url: string;
+}
 
 export interface Props {
-  domain: string;
+  stores: Store[];
 
   /**
    * @hide
    */
-  products?: { item: Item; inList: boolean }[];
-
-  /**
-   * @hide
-   */
-  idx?: number;
+  state: {
+    storeIdx?: number;
+    products?: { item: Item; inList: boolean }[];
+    idx?: number;
+  };
 }
 
 export async function loader(props: Props, _req: Request, ctx: AppContext) {
-  if (props.idx && props.products?.length) {
-    const product = props.products[props.idx];
+  const state = props.state ?? { storeIdx: 0 };
+
+  if (state.idx && state.products?.length) {
+    const product = state.products[state.idx];
 
     if (!product) {
       throw new Error("Product not found");
@@ -36,9 +47,9 @@ export async function loader(props: Props, _req: Request, ctx: AppContext) {
     return props;
   }
 
-  if (props.domain) {
+  if (state.storeIdx !== undefined && !state.products?.length) {
     let res = await ctx.invoke.site.loaders.vtexProductSearch({
-      domain: props.domain,
+      domain: props.stores[state.storeIdx].url,
     });
 
     res = res.splice(0, 8);
@@ -55,17 +66,20 @@ export async function loader(props: Props, _req: Request, ctx: AppContext) {
         inList,
       };
     }));
-    return { ...props, products };
+
+    return { ...props, state: { storeIdx: state.storeIdx, products } };
   }
 
-  return { ...props, products: [] };
+  return props;
 }
 
 export default function Section(props: SectionProps<typeof loader>) {
+  const state = props.state ?? {};
+
   return (
     <div class="bg-primary min-h-screen flex flex-col justify-end">
       <ul class="gap-3 mx-auto grid grid-cols-4 w-max bg-base-200 pt-6 px-6 rounded-t-xl">
-        {props.products?.map((product, idx) => (
+        {state.products?.map((product, idx) => (
           <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
             {product.item.image
               ? (
@@ -91,7 +105,7 @@ export default function Section(props: SectionProps<typeof loader>) {
             <button
               class="btn btn-secondary mt-3"
               hx-post={useSection<typeof Section>({
-                props: { ...props, idx },
+                props: { ...props, state: { ...state, idx } },
               })}
               hx-trigger="click"
               hx-target="closest section"
@@ -107,7 +121,7 @@ export default function Section(props: SectionProps<typeof loader>) {
               <button
                 class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black"
                 hx-post={useSection<typeof Section>({
-                  props: { ...props, idx },
+                  props: { ...props, state: { ...state, idx } },
                 })}
                 hx-trigger="click"
                 hx-target="closest section"

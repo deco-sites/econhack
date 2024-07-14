@@ -12,7 +12,14 @@
     },
     {
       "__resolveType": "site/sections/FeaturedProducts.tsx",
-      "domain": "https://cellarvinhos.com.br"
+      "domain": "https://cellarvinhos.com.br",
+      "stores": [
+        {
+          "logo": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/9c341c74-f7e6-43b9-9113-f3bf700425eb",
+          "name": "Cellar Vinhos",
+          "url": "https://cellarvinhos.com.br"
+        }
+      ]
     }
   ],
   "seo": {
