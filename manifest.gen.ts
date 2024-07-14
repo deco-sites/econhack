@@ -12,11 +12,12 @@ import * as $$$$$$$$$$$1 from "./apps/deco/vtex.ts";
 import * as $$$$$$$$$$$2 from "./apps/site.ts";
 import * as $$$0 from "./loaders/authenticatedUser.ts";
 import * as $$$1 from "./loaders/invitee.ts";
-import * as $$$2 from "./loaders/invitees.ts";
-import * as $$$3 from "./loaders/item.ts";
-import * as $$$4 from "./loaders/itemList.ts";
-import * as $$$5 from "./loaders/userCookie.ts";
-import * as $$$6 from "./loaders/vtexProductSearch.ts";
+import * as $$$2 from "./loaders/invitees-and-gifts.ts";
+import * as $$$3 from "./loaders/invitees.ts";
+import * as $$$4 from "./loaders/item.ts";
+import * as $$$5 from "./loaders/itemList.ts";
+import * as $$$6 from "./loaders/userCookie.ts";
+import * as $$$7 from "./loaders/vtexProductSearch.ts";
 import * as $$$$$$0 from "./sections/FeaturedProducts.tsx";
 import * as $$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$2 from "./sections/Header.tsx";
@@ -33,11 +34,12 @@ const manifest = {
   "loaders": {
     "site/loaders/authenticatedUser.ts": $$$0,
     "site/loaders/invitee.ts": $$$1,
-    "site/loaders/invitees.ts": $$$2,
-    "site/loaders/item.ts": $$$3,
-    "site/loaders/itemList.ts": $$$4,
-    "site/loaders/userCookie.ts": $$$5,
-    "site/loaders/vtexProductSearch.ts": $$$6,
+    "site/loaders/invitees-and-gifts.ts": $$$2,
+    "site/loaders/invitees.ts": $$$3,
+    "site/loaders/item.ts": $$$4,
+    "site/loaders/itemList.ts": $$$5,
+    "site/loaders/userCookie.ts": $$$6,
+    "site/loaders/vtexProductSearch.ts": $$$7,
   },
   "sections": {
     "site/sections/FeaturedProducts.tsx": $$$$$$0,
