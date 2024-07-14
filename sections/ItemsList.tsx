@@ -82,7 +82,7 @@ export default function ItemsList(props: Props) {
 
               <form>
                 <button
-                  hx-post={useSection<Props>({
+                  hx-get={useSection<Props>({
                     href: `?itemId=${item.id}`,
                     props: { ...props, status: "chose" },
                   })}
