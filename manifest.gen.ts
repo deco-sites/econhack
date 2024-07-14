@@ -13,12 +13,14 @@ import * as $$$2 from "./loaders/vtexProductSearch.ts";
 import * as $$$$$$0 from "./sections/FeaturedProducts.tsx";
 import * as $$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$2 from "./sections/Header.tsx";
-import * as $$$$$$4 from "./sections/ItemsList.tsx";
-import * as $$$$$$3 from "./sections/ItWorks.tsx";
-import * as $$$$$$5 from "./sections/Login.tsx";
-import * as $$$$$$6 from "./sections/MyList.tsx";
-import * as $$$$$$7 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$8 from "./sections/UrlList.tsx";
+import * as $$$$$$3 from "./sections/Invitations.tsx";
+import * as $$$$$$5 from "./sections/ItemsList.tsx";
+import * as $$$$$$4 from "./sections/ItWorks.tsx";
+import * as $$$$$$6 from "./sections/Login.tsx";
+import * as $$$$$$7 from "./sections/MyList.tsx";
+import * as $$$$$$8 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$9 from "./sections/TitleList.tsx";
+import * as $$$$$$10 from "./sections/UrlList.tsx";
 
 const manifest = {
   "loaders": {
@@ -30,12 +32,14 @@ const manifest = {
     "site/sections/FeaturedProducts.tsx": $$$$$$0,
     "site/sections/Footer.tsx": $$$$$$1,
     "site/sections/Header.tsx": $$$$$$2,
-    "site/sections/ItemsList.tsx": $$$$$$4,
-    "site/sections/ItWorks.tsx": $$$$$$3,
-    "site/sections/Login.tsx": $$$$$$5,
-    "site/sections/MyList.tsx": $$$$$$6,
-    "site/sections/Theme/Theme.tsx": $$$$$$7,
-    "site/sections/UrlList.tsx": $$$$$$8,
+    "site/sections/Invitations.tsx": $$$$$$3,
+    "site/sections/ItemsList.tsx": $$$$$$5,
+    "site/sections/ItWorks.tsx": $$$$$$4,
+    "site/sections/Login.tsx": $$$$$$6,
+    "site/sections/MyList.tsx": $$$$$$7,
+    "site/sections/Theme/Theme.tsx": $$$$$$8,
+    "site/sections/TitleList.tsx": $$$$$$9,
+    "site/sections/UrlList.tsx": $$$$$$10,
   },
   "actions": {
     "site/actions/addItem.ts": $$$$$$$$$0,
