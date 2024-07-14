@@ -38,6 +38,21 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
   state.storeIdx = Number(new URL(req.url).searchParams.get("s"));
   if (isNaN(state.storeIdx) || !state.storeIdx) state.storeIdx = 0;
 
+  if (state.idx && state.products?.length) {
+    const product = state.products[state.idx];
+
+    if (!product) {
+      throw new Error("Product not found");
+    }
+
+    product.inList = true;
+    await ctx.invoke.site.actions.addItem({
+      item: product.item,
+    });
+
+    return props;
+  }
+
   if (req.headers.get("content-type") === "application/x-www-form-urlencoded") {
     const ft = await req.formData().then((d) => d.get("search")) as string;
 
@@ -67,21 +82,6 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
       ...props,
       state: { ...state, products, storeIdx: state.storeIdx },
     };
-  }
-
-  if (state.idx && state.products?.length) {
-    const product = state.products[state.idx];
-
-    if (!product) {
-      throw new Error("Product not found");
-    }
-
-    product.inList = true;
-    await ctx.invoke.site.actions.addItem({
-      item: product.item,
-    });
-
-    return props;
   }
 
   if (!state.products?.length) {
