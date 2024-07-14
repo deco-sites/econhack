@@ -213,7 +213,7 @@ export default function Section(props: SectionProps<typeof loader>) {
                 disabled={product.inList}
               >
                 <span class="hidden loading loading-spinner loading-xs [.htmx-request_&]:inline " />
-                <span class="[.html-request_&]:hidden inline">
+                <span class="[.htmx-request_&]:hidden inline">
                   {product.inList ? "Adicionado" : "Adicionar à lista"}
                 </span>
               </button>
