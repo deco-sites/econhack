@@ -3,26 +3,32 @@
   "path": "/minha-lista",
   "sections": [
     {
-      "__resolveType": "site/sections/TitleList.tsx",
-      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/b16e8be5-36d3-4389-a7dc-3584c8e29959",
-      "title": "Cellar vinhos",
-      "description": "Variedade de vinhos",
-      "colorTitle": "#2d2f6c",
-      "colorDescription": "2D2F6C"
-    },
-    {
       "__resolveType": "site/sections/FeaturedProducts.tsx",
       "domain": "https://cellarvinhos.com.br",
       "stores": [
         {
-          "logo": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/9c341c74-f7e6-43b9-9113-f3bf700425eb",
-          "name": "Cellar Vinhos",
-          "url": "https://cellarvinhos.com.br"
-        },
-        {
           "logo": "https://shopcasacosta.vtexassets.com/assets/vtex/assets-builder/shopcasacosta.store-theme/1.0.41/img/logo___c7ebfe0aa4e82fed5de1f371b3a3ef6f.png",
           "name": "Casa Costa",
-          "url": "https://www.shopcasacosta.com.br/"
+          "url": "https://www.shopcasacosta.com.br/",
+          "theme": "#c5a193"
+        },
+        {
+          "logo": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/9c341c74-f7e6-43b9-9113-f3bf700425eb",
+          "name": "Cellar Vinhos",
+          "url": "https://cellarvinhos.com.br",
+          "theme": "#2f2f6b"
+        },
+        {
+          "theme": "#003770",
+          "name": "Americanflex",
+          "url": "https://www.americanflex.com.br/",
+          "logo": "https://americanflex.vtexassets.com/assets/vtex.file-manager-graphql/images/a69d9be9-c5df-4c76-bffa-d69fd6ea0502___a6697a71bbfc389f48bdde95e1896520.png"
+        },
+        {
+          "theme": "#222",
+          "name": "ABC Design",
+          "url": "https://www.abcdesignbrasil.com.br/",
+          "logo": "https://abcdesign.vtexassets.com/assets/vtex/assets-builder/abcdesign.store/1.1.74/svg/logo-abcdesign___5ea3802146a54c54ebd482727e1ec8f7.svg"
         }
       ]
     }

@@ -5,7 +5,7 @@ import { AppContext } from "site/apps/site.ts";
 import { toItem } from "site/utils/transform.ts";
 import { Item } from "site/loaders/itemList.ts";
 import Icon from "site/components/ui/Icon.tsx";
-import { ImageWidget } from "apps/admin/widgets.ts";
+import { Color, ImageWidget } from "apps/admin/widgets.ts";
 import { useId } from "site/sdk/useId.ts";
 
 /**
@@ -15,6 +15,7 @@ interface Store {
   logo: ImageWidget;
   name: string;
   url: string;
+  theme?: Color;
 }
 
 export interface Props {
@@ -78,8 +79,20 @@ export default function Section(props: SectionProps<typeof loader>) {
   const id = useId();
   const state = props.state ?? {};
 
+  const store = props.stores[state.storeIdx ?? 0];
+
   return (
-    <div class="bg-primary min-h-screen flex flex-col justify-end">
+    <div
+      class="bg-primary min-h-screen flex flex-col justify-end transition-colors"
+      style={store.theme ? { backgroundColor: store.theme } : {}}
+    >
+      <div class="flex flex-col items-center text-white mt-8 mb-8">
+        <h1 class="text-3xl font-extrabold uppercase">Monte sua lista de presente</h1>
+        <p class="text-xs">
+          Selecione uma de nossas lojas parceiras e busque os produtos que
+          deseja ser presenteado(a).
+        </p>
+      </div>
       <ul class="bg-white rounded-xl mb-3 mx-auto flex flex-wrap gap-3">
         {props.stores.map((store, idx) => (
           <li>
@@ -105,7 +118,7 @@ export default function Section(props: SectionProps<typeof loader>) {
         ))}
       </ul>
       <ul
-        class="gap-3 mx-auto grid grid-cols-4 w-max bg-base-200 pt-6 px-6 rounded-t-xl"
+        class="gap-3 mx-auto grid grid-cols-4 w-max bg-base-200 pt-6 px-6 pb-8 rounded-t-xl"
         id={id}
       >
         {/* Skeleton */}
