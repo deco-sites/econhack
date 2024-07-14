@@ -46,7 +46,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
       await ctx.invoke.site.actions.createInvitee(invitee);
     }
 
-    props.invitees = await ctx.invoke.site.loaders.invitees();
+    props.invitees = await ctx.invoke.site.loaders["invitees-and-gifts"]();
     return props;
   }
 
@@ -90,7 +90,7 @@ export default function InvitationsSection(props: Props) {
                         props: { openList: invitee.user.id },
                       })}
                     >
-                      <GiftIcon />
+                      <GiftIcon className="h-6 w-6" />
                     </button>
                   )}
                   <Modal open={props.openList === invitee.user.id}>
