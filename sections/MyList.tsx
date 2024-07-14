@@ -3,17 +3,22 @@ import Image from "apps/website/components/Image.tsx";
 import { useSection } from "deco/hooks/useSection.ts";
 import Icon from "site/components/ui/Icon.tsx";
 import { SectionProps } from "deco/mod.ts";
+import { AppContext } from "site/apps/site.ts";
 
 export interface Props {
   itemList: Item[];
 }
 
-export async function loader(props: Props, req: Request, ctx: unknown) {
-  console.log({ req });
+export async function loader(props: Props, req: Request, ctx: AppContext) {
+  const url = new URL(req.url);
 
-  if (req.method === "POST") {
-    const form = await req.formData();
-    console.log(form.keys());
+  if (url.searchParams.get("action") === "remove") {
+    const index = Number(url.searchParams.get("index"));
+
+    const id = props.itemList[index].id;
+
+    await ctx.invoke.site.actions.removeItem({ id });
+    props.itemList = await ctx.invoke.site.loaders.itemList();
   }
 
   return props;
@@ -45,23 +50,22 @@ export default function Section(props: SectionProps<typeof loader>) {
               currency: "BRL",
             })}
           </p>
-          {product.reservedBy && (
-            <form
-              hx-post={useSection<typeof Section>({
-                props,
-              })}
-              hx-trigger="click"
-              hx-target="closest section"
-              hx-swap="outerHTML"
-            >
-              <input type="hidden" name="index" value={idx} />
-              <button class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black">
-                <span>
-                  <Icon id="Trash" width={20} height={20} />
-                </span>
-              </button>
-            </form>
-          )}
+          <form
+            hx-get={useSection<typeof Section>({
+              href: "?action=remove&index=" + idx,
+            })}
+            hx-trigger="click"
+            hx-target="closest section"
+            hx-swap="outerHTML"
+          >
+            <input type="hidden" name="index" value={idx} />
+            <button class="absolute top-0 right-0 w-6 h-6 flex items-center justify-center p-1 bg-white rounded-full shadow-black [.htmx-request_&]:disabled">
+              <span class="inline [.htmx-request_&]:hidden">
+                <Icon id="Trash" width={20} height={20} />
+              </span>
+              <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
+            </button>
+          </form>
         </li>
       ))}
     </ul>

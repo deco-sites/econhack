@@ -79,5 +79,13 @@
   "/.deco/blocks/Preview%20%2Floaders%2FInvitations.tsx.json": {
     "blockType": "loaders",
     "__resolveType": "site/loaders/Invitations.tsx"
+  },
+  "/.deco/blocks/Site%20theme.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Theme/Theme.tsx"
+  },
+  "/.deco/blocks/Header.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Header.tsx"
   }
 }

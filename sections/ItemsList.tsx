@@ -2,6 +2,7 @@ import type { Item } from "site/loaders/itemList.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { AppContext } from "site/apps/site.ts";
 import Image from "apps/website/components/Image.tsx";
+import { FlowerIcon } from "site/components/ui/icons/Flower.tsx";
 
 interface Props {
     itemId?: string;
@@ -9,26 +10,27 @@ interface Props {
 }
 
 export async function loader(props: Props, req: Request, ctx: AppContext) {
-    const items = await ctx.invoke("site/loaders/itemList.ts");
-
     const { itemId, username } = props;
     if (itemId !== undefined || username !== undefined) {
         await ctx.invoke.site.actions.reserveItem({ itemId, username });
     }
+    const items = await ctx.invoke("site/loaders/itemList.ts");
     return { items };
 }
 
 export default function ItemsList({ items = [] }: { items: Item[] }) {
     return (
-        <div class="flex px-12 py-8 flex flex-col">
-            <h2 class="text-4xl font-bold">
-                Itens
-            </h2>
-            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max">
+        <div class="flex md:px-8 md:pt-6 pt-1 flex-col justify-end items-center bg-primary min-h-screen w-full">
+            <FlowerIcon className="fixed w-80 h-auto left-0 top-[35%]" />
+            <FlowerIcon className="fixed w-80 h-auto right-0 top-[55%] rotate-180" />
+            <h1 class="md:text-5xl text-2xl text-white font-bold text-center">
+                Lista de presentes
+            </h1>
+            <ul class="gap-3 md:mt-8 max-w-[900px] grid md:grid-cols-4 grid-cols-2 bg-base-200 rounded-t-xl md:p-6 p-2">
                 {items.map((item) => {
                     const isReserved = item.reservedBy !== undefined;
                     return (
-                        <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
+                        <li class="relative flex flex-col flex-1 p-3 rounded shadow-sm">
                             <a href={item.url} target="_blank">
                                 <Image
                                     src={item.image}
@@ -48,23 +50,27 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                 })}
                             </p>
 
-                            <a
-                                href={useSection<Props>({
-                                    props: {
-                                        username: "Gabriel",
-                                        itemId: item.id,
-                                    },
-                                })}
-                                hx-swap="outerHTML"
-                                class={`btn btn-primary mt-3 ${
-                                    !isReserved
-                                        ? "cursor-pointer"
-                                        : "opacity-70"
-                                }`}
-                                disabled={isReserved}
-                            >
-                                {isReserved ? "Reservado" : "Reservar"}
-                            </a>
+                            <form>
+                                <button
+                                    hx-post={useSection<Props>({
+                                        props: {
+                                            username: "Gabriel",
+                                            itemId: item.id,
+                                        },
+                                    })}
+                                    hx-swap="outerHTML"
+                                    hx-target="closest section"
+                                    hx-trigger="click"
+                                    class={`btn btn-primary mt-3 text-center w-full ${
+                                        !isReserved
+                                            ? "cursor-pointer"
+                                            : "opacity-70 cursor-default"
+                                    }`}
+                                    disabled={isReserved}
+                                >
+                                    {isReserved ? "Reservado" : "Reservar"}
+                                </button>
+                            </form>
                         </li>
                     );
                 })}
