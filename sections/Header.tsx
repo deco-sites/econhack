@@ -2,6 +2,8 @@ import { useSection } from "deco/hooks/useSection.ts";
 import Modal from "site/components/ui/Modal.tsx";
 import { Section } from "deco/blocks/section.ts";
 import Icon from "site/components/ui/Icon.tsx";
+import { LetterIcon } from "site/components/ui/icons/Letter.tsx";
+import { MagnifyingGlassIcon } from "site/components/ui/icons/MagnifyingGlass.tsx";
 
 export interface Props {
   openList?: boolean;
@@ -10,7 +12,17 @@ export interface Props {
 
 export default function Header(props: Props) {
   return (
-    <header>
+    <>
+      <header class="w-full h-16 bg-base-200 flex items-center justify-end px-8">
+        <div class="flex gap-4">
+          <a href="/convidados">
+            <LetterIcon />
+          </a>
+          <a href="/minha-lista">
+            <MagnifyingGlassIcon />
+          </a>
+        </div>
+      </header>
       <button
         class="fixed bottom-3 right-3 btn btn-accent"
         hx-get={useSection<typeof Header>({ props: { openList: true } })}
@@ -33,6 +45,6 @@ export default function Header(props: Props) {
           <props.itemList.Component {...props.itemList.props} />
         </div>
       </Modal>
-    </header>
+    </>
   );
 }
