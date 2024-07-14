@@ -22,10 +22,9 @@ import * as $$$$$$5 from "./sections/ItemsList.tsx";
 import * as $$$$$$4 from "./sections/ItWorks.tsx";
 import * as $$$$$$6 from "./sections/Login.tsx";
 import * as $$$$$$7 from "./sections/MyList.tsx";
-import * as $$$$$$8 from "./sections/Private.tsx";
-import * as $$$$$$9 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$10 from "./sections/TitleList.tsx";
-import * as $$$$$$11 from "./sections/UrlList.tsx";
+import * as $$$$$$8 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$9 from "./sections/TitleList.tsx";
+import * as $$$$$$10 from "./sections/UrlList.tsx";
 
 const manifest = {
   "loaders": {
@@ -45,10 +44,9 @@ const manifest = {
     "site/sections/ItWorks.tsx": $$$$$$4,
     "site/sections/Login.tsx": $$$$$$6,
     "site/sections/MyList.tsx": $$$$$$7,
-    "site/sections/Private.tsx": $$$$$$8,
-    "site/sections/Theme/Theme.tsx": $$$$$$9,
-    "site/sections/TitleList.tsx": $$$$$$10,
-    "site/sections/UrlList.tsx": $$$$$$11,
+    "site/sections/Theme/Theme.tsx": $$$$$$8,
+    "site/sections/TitleList.tsx": $$$$$$9,
+    "site/sections/UrlList.tsx": $$$$$$10,
   },
   "actions": {
     "site/actions/addItem.ts": $$$$$$$$$0,

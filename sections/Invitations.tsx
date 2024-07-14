@@ -1,6 +1,6 @@
 import { Invitee } from "site/loaders/invitees.ts";
 
-interface Props {
+export interface Props {
   invitees: Invitee[];
 }
 
@@ -17,7 +17,9 @@ export default function Section({ invitees }: Props) {
         {invitees.map((invitee) => {
           return (
             <div class="h-14 p-4 border-b border-gray-200 flex">
-              <span class="font-bold w-[20%] flex">{invitee.username}</span>
+              <span class="font-bold w-[20%] flex">
+                {invitee.username}
+              </span>
             </div>
           );
         })}
@@ -25,4 +27,3 @@ export default function Section({ invitees }: Props) {
     </div>
   );
 }
-
