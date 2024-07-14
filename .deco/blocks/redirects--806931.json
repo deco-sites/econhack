@@ -1,0 +1,8 @@
+{
+  "redirect": {
+    "from": "/",
+    "to": "/itens",
+    "type": "temporary"
+  },
+  "__resolveType": "website/loaders/redirect.ts"
+}
