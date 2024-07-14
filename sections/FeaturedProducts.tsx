@@ -135,7 +135,7 @@ export default function Section(props: SectionProps<typeof loader>) {
 
   return (
     <div
-      class="bg-primary min-h-screen flex flex-col justify-end transition-colors"
+      class="bg-primary min-h-screen flex flex-col justify-end transition-colors pt-8"
       style={store.theme ? { backgroundColor: store.theme } : {}}
     >
       <div class="flex flex-col items-center text-white mt-8 mb-8">
