@@ -28,7 +28,6 @@ export interface Props {
     storeIdx?: number;
     searchTerm?: string;
     products?: { item: Item; inList: boolean }[];
-    idx?: number;
   };
 }
 
@@ -38,14 +37,18 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
   state.storeIdx = Number(new URL(req.url).searchParams.get("s"));
   if (isNaN(state.storeIdx) || !state.storeIdx) state.storeIdx = 0;
 
-  if (state.idx && state.products?.length) {
-    const product = state.products[state.idx];
+  if (state.products?.length) {
+    const url = new URL(req.url);
+    const idx = Number(url.searchParams.get("idx"));
+
+    const product = state.products[idx];
 
     if (!product) {
       throw new Error("Product not found");
     }
 
-    if (new URL(req.url).searchParams.get("action") === "remove") {
+    const action = url.searchParams.get("action")
+    if (action === "remove") {
       product.inList = false;
       await ctx.invoke.site.actions.removeItem({
         id: product.item.id,
@@ -54,12 +57,14 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
       return props;
     }
 
-    product.inList = true;
-    await ctx.invoke.site.actions.addItem({
-      item: product.item,
-    });
+    if (action === "add") {
+      product.inList = true;
+      await ctx.invoke.site.actions.addItem({
+        item: product.item,
+      });
 
-    return props;
+      return props;
+    }
   }
 
   if (req.headers.get("content-type") === "application/x-www-form-urlencoded") {
@@ -213,8 +218,9 @@ export default function Section(props: SectionProps<typeof loader>) {
               </p>
               <button
                 class="btn btn-secondary mt-3"
-                hx-post={useSection<typeof Section>({
+                hx-post={useSection({
                   props: { ...props, state: { ...state, idx } },
+                  href: `?action=add&idx=${idx}`,
                 })}
                 hx-trigger="click"
                 hx-target="closest section"
@@ -229,9 +235,8 @@ export default function Section(props: SectionProps<typeof loader>) {
               {product.inList && (
                 <button
                   class="absolute top-0 right-0 w-6 h-6 flex items-center justify-center p-1 bg-white rounded-full shadow-black [.htmx-request_&]:disabled"
-                  hx-post={useSection<typeof Section>({
-                    props: { ...props, state: { ...state, idx } },
-                    href: "?action=remove",
+                  hx-post={useSection({
+                    href: `?action=remove&idx=${idx}`,
                   })}
                   hx-trigger="click"
                   hx-target="closest section"
