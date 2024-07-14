@@ -5,6 +5,12 @@
     {
       "__resolveType": "site/sections/Login.tsx",
       "buttonText": "123"
+    },
+    {
+      "__resolveType": "site/sections/Invitations.tsx",
+      "invitees": {
+        "__resolveType": "site/loaders/invitees.ts"
+      }
     }
   ],
   "seo": {
