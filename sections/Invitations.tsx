@@ -15,12 +15,9 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
       f.get("username")?.toString()
     );
 
-    console.log({ username });
-
     if (!username) return props;
 
     const newUser = await ctx.invoke.site.actions.createInvitee({ username });
-    console.log({ newUser });
     props.invitees.push(newUser);
     return props;
   }
