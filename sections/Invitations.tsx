@@ -40,6 +40,8 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
         const [username, email] = line.split(";");
         return { username, email };
       },
+    ).filter((invitee) =>
+      props.invitees.every((i) => i.user.username !== invitee.username)
     );
 
     for (const invitee of invitees) {
@@ -87,17 +89,24 @@ export default function InvitationsSection(props: Props) {
                       hx-swap="outerHTML"
                       hx-target="closest section"
                       hx-get={useSection<Props>({
-                        props: { openList: invitee.user.id },
+                        props: {
+                          openList: invitee.user.id,
+                        },
                       })}
                     >
                       <GiftIcon className="h-6 w-6" />
                     </button>
                   )}
-                  <Modal open={props.openList === invitee.user.id}>
+                  <Modal
+                    open={props.openList ===
+                      invitee.user.id}
+                  >
                     <div class="bg-white rounded p-4 relative max-h-[90vh] overflow-y-auto">
                       <button
                         class="absolute top-2 right-2"
-                        hx-get={useSection<typeof Header>({
+                        hx-get={useSection<
+                          typeof Header
+                        >({
                           props: { openList: false },
                         })}
                         hx-target="closest section"
@@ -115,9 +124,15 @@ export default function InvitationsSection(props: Props) {
                           <li>
                             {item.image
                               ? (
-                                <a href={item.url} target="_blank">
+                                <a
+                                  href={item
+                                    .url}
+                                  target="_blank"
+                                >
                                   <Image
-                                    src={item.image ?? ""}
+                                    src={item
+                                      .image ??
+                                      ""}
                                     width={248}
                                     height={248}
                                     class="mx-auto mb-3"
@@ -131,10 +146,14 @@ export default function InvitationsSection(props: Props) {
                             <p>{item.message}</p>
 
                             <p class="font-bold text-sm">
-                              {item.price.toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
+                              {item.price
+                                .toLocaleString(
+                                  "pt-BR",
+                                  {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  },
+                                )}
                             </p>
                           </li>
                         ))}
