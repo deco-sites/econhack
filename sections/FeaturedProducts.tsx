@@ -78,9 +78,9 @@ export default function Section(props: SectionProps<typeof loader>) {
 
   return (
     <div class="bg-primary min-h-screen flex flex-col justify-end">
-      <ul class="gap-3 mx-auto grid grid-cols-4 w-max bg-base-200 pt-6 px-6 rounded-t-xl">
+      <ul class="gap-3 mx-auto grid md:grid-cols-4 grid-cols-2 max-w-[900px] w-full bg-base-200 pt-6 md:px-6 px-1 rounded-t-xl">
         {state.products?.map((product, idx) => (
-          <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded">
+          <li class="relative flex flex-col flex-1 p-3 border border-gray-200 rounded">
             {product.item.image
               ? (
                 <a href={product.item.url} target="_blank">
