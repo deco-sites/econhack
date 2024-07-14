@@ -8,9 +8,12 @@ import * as $$$$$$$$$2 from "./actions/reserveItem.ts";
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$1 from "./apps/deco/vtex.ts";
 import * as $$$$$$$$$$$2 from "./apps/site.ts";
-import * as $$$0 from "./loaders/item.ts";
-import * as $$$1 from "./loaders/itemList.ts";
-import * as $$$2 from "./loaders/vtexProductSearch.ts";
+import * as $$$0 from "./loaders/invitee.ts";
+import * as $$$1 from "./loaders/invitees.ts";
+import * as $$$2 from "./loaders/item.ts";
+import * as $$$3 from "./loaders/itemList.ts";
+import * as $$$4 from "./loaders/userCookie.ts";
+import * as $$$5 from "./loaders/vtexProductSearch.ts";
 import * as $$$$$$0 from "./sections/FeaturedProducts.tsx";
 import * as $$$$$$1 from "./sections/Footer.tsx";
 import * as $$$$$$2 from "./sections/Header.tsx";
@@ -19,15 +22,19 @@ import * as $$$$$$5 from "./sections/ItemsList.tsx";
 import * as $$$$$$4 from "./sections/ItWorks.tsx";
 import * as $$$$$$6 from "./sections/Login.tsx";
 import * as $$$$$$7 from "./sections/MyList.tsx";
-import * as $$$$$$8 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$9 from "./sections/TitleList.tsx";
-import * as $$$$$$10 from "./sections/UrlList.tsx";
+import * as $$$$$$8 from "./sections/Private.tsx";
+import * as $$$$$$9 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$10 from "./sections/TitleList.tsx";
+import * as $$$$$$11 from "./sections/UrlList.tsx";
 
 const manifest = {
   "loaders": {
-    "site/loaders/item.ts": $$$0,
-    "site/loaders/itemList.ts": $$$1,
-    "site/loaders/vtexProductSearch.ts": $$$2,
+    "site/loaders/invitee.ts": $$$0,
+    "site/loaders/invitees.ts": $$$1,
+    "site/loaders/item.ts": $$$2,
+    "site/loaders/itemList.ts": $$$3,
+    "site/loaders/userCookie.ts": $$$4,
+    "site/loaders/vtexProductSearch.ts": $$$5,
   },
   "sections": {
     "site/sections/FeaturedProducts.tsx": $$$$$$0,
@@ -38,9 +45,10 @@ const manifest = {
     "site/sections/ItWorks.tsx": $$$$$$4,
     "site/sections/Login.tsx": $$$$$$6,
     "site/sections/MyList.tsx": $$$$$$7,
-    "site/sections/Theme/Theme.tsx": $$$$$$8,
-    "site/sections/TitleList.tsx": $$$$$$9,
-    "site/sections/UrlList.tsx": $$$$$$10,
+    "site/sections/Private.tsx": $$$$$$8,
+    "site/sections/Theme/Theme.tsx": $$$$$$9,
+    "site/sections/TitleList.tsx": $$$$$$10,
+    "site/sections/UrlList.tsx": $$$$$$11,
   },
   "actions": {
     "site/actions/addItem.ts": $$$$$$$$$0,
