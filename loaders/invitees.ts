@@ -1,7 +1,7 @@
 export interface Invitee {
   id: string;
   email: string;
-  username: number;
+  username: string;
 }
 
 export default async function loader(

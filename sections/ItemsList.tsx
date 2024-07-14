@@ -4,21 +4,25 @@ import { AppContext } from "site/apps/site.ts";
 import Image from "apps/website/components/Image.tsx";
 import { FlowerIcon } from "site/components/ui/icons/Flower.tsx";
 
-interface Props {
-  itemId?: string;
-  username?: string;
+export interface Props {
+  items: Item[];
 }
 
 export async function loader(props: Props, req: Request, ctx: AppContext) {
-  const { itemId, username } = props;
-  if (itemId !== undefined || username !== undefined) {
-    await ctx.invoke.site.actions.reserveItem({ itemId, username });
+  const user = await ctx.invoke.site.loaders.authenticatedUser();
+  const itemId = new URL(req.url).searchParams.get("itemId");
+
+  if (itemId && user) {
+    await ctx.invoke.site.actions.reserveItem({
+      itemId,
+      username: user.username,
+    });
   }
-  const items = await ctx.invoke("site/loaders/itemList.ts");
-  return { items };
+
+  return props;
 }
 
-export default function ItemsList({ items = [] }: { items: Item[] }) {
+export default function ItemsList({ items }: Props) {
   return (
     <div class="flex md:px-8 md:pt-6 pt-1 flex-col justify-end items-center bg-primary min-h-screen w-full">
       <FlowerIcon className="fixed w-80 h-auto left-0 top-[35%]" />
@@ -30,7 +34,7 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
         {items.map((item) => {
           const isReserved = item.reservedBy !== undefined;
           return (
-            <li class="relative flex flex-col flex-1 p-3 rounded shadow-sm">
+            <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded [.htmx-request_&]:hidden">
               <a href={item.url} target="_blank">
                 <Image
                   src={item.image}
@@ -53,10 +57,7 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
               <form>
                 <button
                   hx-post={useSection<Props>({
-                    props: {
-                      username: "Gabriel",
-                      itemId: item.id,
-                    },
+                    href: `?itemId=${item.id}`,
                   })}
                   hx-swap="outerHTML"
                   hx-target="closest section"
