@@ -8,22 +8,22 @@ export interface Props {
   itemList: Section;
 }
 
-export default function Section(props: Props) {
+export default function Header(props: Props) {
   return (
     <header>
       <button
         class="fixed bottom-3 right-3 btn btn-accent"
-        hx-get={useSection<typeof Section>({ props: { openList: true } })}
+        hx-get={useSection<typeof Header>({ props: { openList: true } })}
         hx-target="closest section"
         hx-swap="outerHTML"
       >
         Sua lista
       </button>
       <Modal open={props.openList}>
-        <div class="bg-white rounded p-4 relative">
+        <div class="bg-white rounded p-4 relative max-h-[90vh] overflow-y-auto">
           <button
             class="absolute top-2 right-2"
-            hx-get={useSection<typeof Section>({ props: { openList: false } })}
+            hx-get={useSection<typeof Header>({ props: { openList: false } })}
             hx-target="closest section"
             hx-swap="outerHTML"
           >

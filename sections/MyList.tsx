@@ -45,23 +45,21 @@ export default function Section(props: SectionProps<typeof loader>) {
               currency: "BRL",
             })}
           </p>
-          {product.reservedBy && (
-            <form
-              hx-post={useSection<typeof Section>({
-                props,
-              })}
-              hx-trigger="click"
-              hx-target="closest section"
-              hx-swap="outerHTML"
-            >
-              <input type="hidden" name="index" value={idx} />
-              <button class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black">
-                <span>
-                  <Icon id="Trash" width={20} height={20} />
-                </span>
-              </button>
-            </form>
-          )}
+          <form
+            hx-post={useSection<typeof Section>({
+              props,
+            })}
+            hx-trigger="click"
+            hx-target="closest section"
+            hx-swap="outerHTML"
+          >
+            <input type="hidden" name="index" value={idx} />
+            <button class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black">
+              <span>
+                <Icon id="Trash" width={20} height={20} />
+              </span>
+            </button>
+          </form>
         </li>
       ))}
     </ul>
