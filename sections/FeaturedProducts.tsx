@@ -26,6 +26,7 @@ export interface Props {
    */
   state: {
     storeIdx?: number;
+    searchTerm?: string;
     products?: { item: Item; inList: boolean }[];
     idx?: number;
   };
@@ -34,8 +35,13 @@ export interface Props {
 export async function loader(props: Props, req: Request, ctx: AppContext) {
   const state = props.state ?? { storeIdx: 0 };
 
+  state.storeIdx = Number(new URL(req.url).searchParams.get("s"));
+  if (isNaN(state.storeIdx) || !state.storeIdx) state.storeIdx = 0;
+
   if (req.headers.get("content-type") === "application/x-www-form-urlencoded") {
     const ft = await req.formData().then((d) => d.get("search")) as string;
+
+    state.searchTerm = ft;
 
     let res = await ctx.invoke.site.loaders.vtexProductSearch({
       domain: props.stores[state.storeIdx ?? 0].url,
@@ -57,7 +63,10 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
       };
     }));
 
-    return { ...props, state: { storeIdx: state.storeIdx, products } };
+    return {
+      ...props,
+      state: { ...state, products, storeIdx: state.storeIdx },
+    };
   }
 
   if (state.idx && state.products?.length) {
@@ -75,7 +84,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
     return props;
   }
 
-  if (state.storeIdx !== undefined && !state.products?.length) {
+  if (!state.products?.length) {
     let res = await ctx.invoke.site.loaders.vtexProductSearch({
       domain: props.stores[state.storeIdx].url,
     });
@@ -127,8 +136,9 @@ export default function Section(props: SectionProps<typeof loader>) {
             <button
               class="btn rounded-xl w-32 h-24 opacity-50 hover:opacity-100 disabled:opacity-100 transition-all relative border-none"
               style={{ background: "transparent" }}
-              hx-post={useSection<typeof Section>({
-                props: { ...props, state: { storeIdx: idx } },
+              hx-get={useSection<typeof Section>({
+                href: "?s=" + idx,
+                props: { stores: props.stores },
               })}
               hx-trigger="click"
               hx-target="closest section"
@@ -147,14 +157,18 @@ export default function Section(props: SectionProps<typeof loader>) {
       </ul>
       <div class="w-max bg-base-200 pt-6 px-6 pb-8 rounded-t-xl mx-auto">
         <input
-          class="input input-bordered"
+          class="input input-bordered mb-4 w-full max-w-60"
           name="search"
           type="search"
           placeholder={`Busque em ${store.name}`}
           hx-post={useSection<typeof Section>({ props })}
           hx-trigger="input changed delay:500ms, search"
           hx-target="closest section"
+          value={state.searchTerm}
         />
+        {state.products?.length === 0 && (
+          <p class="text-center mt-3">Nenhum produto encontrado</p>
+        )}
         <ul
           class="gap-3 grid grid-cols-4"
           id={id}

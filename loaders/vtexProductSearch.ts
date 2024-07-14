@@ -6,9 +6,11 @@ export interface Props {
 }
 
 export default async function loader(props: Props): Promise<Product[]> {
-  const queryString = new URLSearchParams(props.query).toString();
+  const queryString = new URLSearchParams();
 
-  console.log({ queryString })
+  for (const [key, value] of Object.entries(props.query ?? {})) {
+    queryString.append(key, encodeURIComponent(value));
+  }
 
   return await fetch(
     `${props.domain}/api/catalog_system/pub/products/search?${queryString}`,
