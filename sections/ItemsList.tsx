@@ -22,6 +22,17 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
   const user = await ctx.invoke.site.loaders.authenticatedUser();
   const itemId = url.searchParams.get("itemId");
 
+  if (user) {
+    props.items = props.items.map((item) => {
+      console.log({ item, user });
+      if (item.reservedBy === user.id) {
+        item.reservedBy = "YOU";
+      }
+
+      return item;
+    });
+  }
+
   if (itemId) {
     props.selectedItem = props.items.find((item) => item.id === itemId);
   }
@@ -54,11 +65,18 @@ export default function ItemsList(props: Props) {
       </h1>
       <ul class="gap-3 md:mt-8 max-w-[900px] grid md:grid-cols-4 grid-cols-2 bg-base-200 rounded-t-xl md:p-6 p-2">
         {props.items.map((item) => {
-          const isReserved = item.reservedBy !== undefined;
           return (
             <li
-              class={`relative flex flex-col w-48 p-3 border border-gray-200 rounded [.htmx-request_&]:hidden ${
-                isReserved ? "opacity-40 pointer-events-none" : ""
+              class={`relative flex flex-col w-48 p-3 border rounded [.htmx-request_&]:hidden ${
+                item.reservedBy ? "pointer-events-none" : ""
+              } ${
+                item.reservedBy && item.reservedBy !== "YOU" && item.reservedBy
+                  ? "opacity-40"
+                  : ""
+              } ${
+                item.reservedBy === "YOU"
+                  ? "border-green-400 border-2 opacity-60"
+                  : "border-gray-200"
               }`}
             >
               <a href={item.url} target="_blank">
@@ -80,26 +98,36 @@ export default function ItemsList(props: Props) {
                 })}
               </p>
 
-              <form>
-                <button
-                  hx-get={useSection<Props>({
-                    href: `?itemId=${item.id}`,
-                    props: { ...props, status: "chose" },
-                  })}
-                  hx-swap="outerHTML"
-                  hx-target="closest section"
-                  hx-trigger="click"
-                  class={`btn btn-primary mt-3 text-center w-full ${
-                    !isReserved ? "cursor-pointer" : "opacity-70 cursor-default"
-                  }`}
-                  disabled={isReserved}
-                >
-                  <span class="inline [.htmx-request_&]:hidden">
-                    {isReserved ? "Presenteado" : "Presentear"}
+              {item.reservedBy === "YOU"
+                ? (
+                  <span class="btn mt-3 text-center w-full">
+                    Obrigado!
                   </span>
-                  <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
-                </button>
-              </form>
+                )
+                : (
+                  <form>
+                    <button
+                      hx-get={useSection<Props>({
+                        href: `?itemId=${item.id}`,
+                        props: { ...props, status: "chose" },
+                      })}
+                      hx-swap="outerHTML"
+                      hx-target="closest section"
+                      hx-trigger="click"
+                      class={`btn btn-primary mt-3 text-center w-full ${
+                        !item.reservedBy
+                          ? "cursor-pointer"
+                          : "opacity-70 cursor-default"
+                      }`}
+                      disabled={!!item.reservedBy}
+                    >
+                      <span class="inline [.htmx-request_&]:hidden">
+                        {item.reservedBy ? "Presenteado" : "Presentear"}
+                      </span>
+                      <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
+                    </button>
+                  </form>
+                )}
             </li>
           );
         })}
