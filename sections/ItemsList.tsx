@@ -19,7 +19,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 
 export default function ItemsList({ items = [] }: { items: Item[] }) {
     return (
-        <div class="flex px-8 pt-6 flex-col justify-end items-center bg-primary min-h-screen">
+        <div class="flex md:px-8 md:pt-6 pt-1 flex-col justify-end items-center bg-primary min-h-screen w-full">
             <img
                 src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/55d28154-9738-40af-93d5-a4d2c53abc81"
                 alt="Uma flor em estilo minimalista"
@@ -30,14 +30,14 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                 alt="Uma flor em estilo minimalista"
                 class="fixed w-80 h-auto right-0 top-[55%] rotate-180"
             />
-            <h1 class="text-5xl text-white font-bold">
+            <h1 class="md:text-5xl text-2xl text-white font-bold text-center">
                 Lista de presentes
             </h1>
-            <ul class="gap-3 mt-8 mx-auto grid grid-cols-4 w-max bg-base-200 rounded-t-xl p-6">
+            <ul class="gap-3 md:mt-8 max-w-[900px] grid md:grid-cols-4 grid-cols-2 bg-base-200 rounded-t-xl md:p-6 p-2">
                 {items.map((item) => {
                     const isReserved = item.reservedBy !== undefined;
                     return (
-                        <li class="relative flex flex-col w-48 p-3 rounded shadow-sm">
+                        <li class="relative flex flex-col flex-1 p-3 rounded shadow-sm">
                             <a href={item.url} target="_blank">
                                 <Image
                                     src={item.image}
