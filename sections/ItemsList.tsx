@@ -30,7 +30,7 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                 {items.map((item) => {
                     const isReserved = item.reservedBy !== undefined;
                     return (
-                        <li class="relative flex flex-col flex-1 p-3 rounded shadow-sm">
+                        <li class="relative flex flex-col flex-1 p-3 border border-gray-200 rounded shadow-sm">
                             <a href={item.url} target="_blank">
                                 <Image
                                     src={item.image}
@@ -50,7 +50,7 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                 })}
                             </p>
 
-                            <form>
+                            <form class="mt-auto">
                                 <button
                                     hx-post={useSection<Props>({
                                         props: {
@@ -61,7 +61,7 @@ export default function ItemsList({ items = [] }: { items: Item[] }) {
                                     hx-swap="outerHTML"
                                     hx-target="closest section"
                                     hx-trigger="click"
-                                    class={`btn btn-primary mt-3 text-center w-full ${
+                                    class={`btn btn-secondary mt-3 text-center w-full ${
                                         !isReserved
                                             ? "cursor-pointer"
                                             : "opacity-70 cursor-default"
