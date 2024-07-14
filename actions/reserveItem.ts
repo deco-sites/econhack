@@ -3,6 +3,7 @@ import { AppContext } from "site/apps/site.ts";
 export interface Props {
   itemId: string;
   username: string;
+  message?: string;
 }
 
 export default async function action(
@@ -10,15 +11,14 @@ export default async function action(
   _req: Request,
   _ctx: AppContext,
 ) {
-  const { itemId, username } = props;
-  await fetch("http://econhackapi.edurodrigues.dev/reservation-by-user", {
-    method: "POST",
-    body: JSON.stringify({
-      itemId,
-      username,
-    }),
-    headers: {
-      "Content-Type": "application/json",
+  return await fetch(
+    "http://econhackapi.edurodrigues.dev/reservation-by-user",
+    {
+      method: "POST",
+      body: JSON.stringify(props),
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-  });
+  ).then((r) => r.json());
 }

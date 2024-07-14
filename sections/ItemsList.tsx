@@ -7,7 +7,8 @@ import Modal from "site/components/ui/Modal.tsx";
 
 export interface Props {
   items: Item[];
-  gifted?: Item;
+  status?: "chose" | "gifted";
+  selectedItem?: Item;
 }
 
 export async function loader(props: Props, req: Request, ctx: AppContext) {
@@ -21,13 +22,23 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
   const user = await ctx.invoke.site.loaders.authenticatedUser();
   const itemId = url.searchParams.get("itemId");
 
-  if (itemId && user) {
+  if (itemId) {
+    props.selectedItem = props.items.find((item) => item.id === itemId);
+  }
+
+  if (
+    itemId && user &&
+    req.headers.get("content-type") === "application/x-www-form-urlencoded"
+  ) {
+    const message = await req.formData().then((f) =>
+      f.get("message")?.toString()
+    );
+
     await ctx.invoke.site.actions.reserveItem({
       itemId,
       username: user.username,
+      message,
     });
-
-    props.gifted = props.items.find((item) => item.id === itemId);
   }
 
   return props;
@@ -73,6 +84,7 @@ export default function ItemsList(props: Props) {
                 <button
                   hx-post={useSection<Props>({
                     href: `?itemId=${item.id}`,
+                    props: { ...props, status: "chose" },
                   })}
                   hx-swap="outerHTML"
                   hx-target="closest section"
@@ -82,33 +94,87 @@ export default function ItemsList(props: Props) {
                   }`}
                   disabled={isReserved}
                 >
-                  {isReserved ? "Presenteado" : "Presentear"}
+                  <span class="inline [.htmx-request_&]:hidden">
+                    {isReserved ? "Presenteado" : "Presentear"}
+                  </span>
+                  <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
                 </button>
               </form>
             </li>
           );
         })}
       </ul>
-      {props.gifted
-        ? (
-          <Modal open={true}>
-            <div class="flex flex-col items-center justify-center p-6 bg-base-200 rounded-xl">
-              <h2 class="text-2xl font-bold text-center">
-                Muito obrigado pelo presente!
-              </h2>
-              <p class="text-center mt-3">
-                Agora, basta entrar no site e comprar o produto.
-              </p>
-              <a
-                href={props.gifted.url}
-                class="flex flex-col items-center mt-6"
-              >
-                <Image src={props.gifted.image} width={128} height={128} />
-                <span class="btn btn-primary w-full mt-3">Comprar</span>
-              </a>
-            </div>
-          </Modal>
-        )
+      {props.selectedItem
+        ? (() => {
+          if (props.status === "chose") {
+            return (
+              <Modal open={true}>
+                <div class="flex flex-col items-center justify-center p-6 bg-base-200 rounded-xl">
+                  <h2 class="text-2xl font-bold text-center">
+                    Ótima escolha! :)
+                  </h2>
+                  <p class="text-center mt-3">
+                    1. Entre no site e comprar o produto.
+                  </p>
+                  <a
+                    href={props.selectedItem.url}
+                    target="_blank"
+                    class="flex flex-col items-center mt-6"
+                  >
+                    <Image
+                      src={props.selectedItem.image}
+                      width={128}
+                      height={128}
+                    />
+                    <span class="btn btn-primary w-full mt-3">Comprar</span>
+                  </a>
+                  <form
+                    hx-post={useSection<Props>({
+                      props: { ...props, status: "gifted" },
+                      href: "?itemId=" + props.selectedItem.id,
+                    })}
+                    hx-swap="outerHTML"
+                    hx-target="closest section"
+                    hx-trigger="submit"
+                    class="mt-6 flex flex-col items-center w-full"
+                  >
+                    <p class="mb-2">2. Deixe um recado</p>
+                    <textarea
+                      name="message"
+                      class="textarea textarea-bordered w-full"
+                    />
+                    <button class="btn btn-secondary w-full mt-2" type="submit">
+                      <span class="inline [.htmx-request_&]:hidden">
+                        Enviar
+                      </span>
+                      <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
+                    </button>
+                  </form>
+                </div>
+              </Modal>
+            );
+          }
+
+          if (props.status === "gifted") {
+            return (
+              <Modal open={true}>
+                <div class="flex flex-col items-center justify-center p-6 bg-base-200 rounded-xl">
+                  <h2 class="text-2xl font-bold text-center mb-3">
+                    Muito obrigado pelo presente!
+                  </h2>
+                  <Image
+                    src={props.selectedItem.image}
+                    width={128}
+                    height={128}
+                  />
+                  <span class="btn btn-primary w-full mt-3">
+                    Presente confirmado!
+                  </span>
+                </div>
+              </Modal>
+            );
+          }
+        })()
         : null}
     </div>
   );
