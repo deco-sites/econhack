@@ -59,10 +59,11 @@ export default function Section(props: SectionProps<typeof loader>) {
             hx-swap="outerHTML"
           >
             <input type="hidden" name="index" value={idx} />
-            <button class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black">
-              <span>
+            <button class="absolute top-0 right-0 w-6 h-6 flex items-center justify-center p-1 bg-white rounded-full shadow-black [.htmx-request_&]:disabled">
+              <span class="inline [.htmx-request_&]:hidden">
                 <Icon id="Trash" width={20} height={20} />
               </span>
+              <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
             </button>
           </form>
         </li>
