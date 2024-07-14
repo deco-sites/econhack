@@ -85,7 +85,7 @@ export default function InvitationsSection(props: Props) {
 
                   {invitee.items.length > 0 && (
                     <button
-                      class="cursor-pointer"
+                      class="cursor-pointer w-6 h-6 items-center justify-center [.htmx-request_&]:disabled"
                       hx-swap="outerHTML"
                       hx-target="closest section"
                       hx-get={useSection<Props>({
@@ -94,7 +94,8 @@ export default function InvitationsSection(props: Props) {
                         },
                       })}
                     >
-                      <GiftIcon className="h-6 w-6 fill-primary" />
+                      <GiftIcon className="h-6 w-6 fill-primary [.htmx-request_&]:hidden" />
+                      <span class="h-5 w-5 loading loading-spinner hidden [.htmx-request_&]:block" />
                     </button>
                   )}
                   <Modal
