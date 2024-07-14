@@ -5,6 +5,7 @@ export interface Item {
   image: string;
   url: string;
   reservedBy: string | null;
+  message: string | null;
 }
 
 export default async function loader(

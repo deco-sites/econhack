@@ -6,6 +6,7 @@ import { InviteeAndGift } from "site/loaders/invitees-and-gifts.ts";
 import Modal from "site/components/ui/Modal.tsx";
 import Header from "site/sections/Header.tsx";
 import Image from "apps/website/components/Image.tsx";
+import { GiftIcon } from "site/components/ui/icons/Gift.tsx";
 
 export interface Props {
   invitees: InviteeAndGift[];
@@ -22,7 +23,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
     if (!username) return props;
 
     await ctx.invoke.site.actions.createInvitee({ username });
-    props.invitees = await ctx.invoke.site.loaders.invitees();
+    props.invitees = await ctx.invoke.site.loaders["invitees-and-gifts"]();
 
     return props;
   }
@@ -35,7 +36,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
       id: new URL(req.url).searchParams.get("id")!,
     });
 
-    props.invitees = props.invitees.filter((invitee) => invitee.id !== id);
+    props.invitees = props.invitees.filter((invitee) => invitee.user.id !== id);
     return props;
   }
 
@@ -58,16 +59,18 @@ export default function InvitationsSection(props: Props) {
                     {invitee.user.username}
                   </span>
 
-                  <button
-                    class="cursor-pointer"
-                    hx-swap="outerHTML"
-                    hx-target="closest section"
-                    hx-get={useSection<Props>({
-                      props: { openList: invitee.user.id },
-                    })}
-                  >
-                    Exibir
-                  </button>
+                  {invitee.items.length > 0 && (
+                    <button
+                      class="cursor-pointer"
+                      hx-swap="outerHTML"
+                      hx-target="closest section"
+                      hx-get={useSection<Props>({
+                        props: { openList: invitee.user.id },
+                      })}
+                    >
+                      <GiftIcon />
+                    </button>
+                  )}
                   <Modal open={props.openList === invitee.user.id}>
                     <div class="bg-white rounded p-4 relative max-h-[90vh] overflow-y-auto">
                       <button
@@ -103,6 +106,7 @@ export default function InvitationsSection(props: Props) {
                             <span class="text-ellipsis whitespace-nowrap text-left overflow-hidden text-xs">
                               {item.name}
                             </span>
+                            <p>{item.message}</p>
 
                             <p class="font-bold text-sm">
                               {item.price.toLocaleString("pt-BR", {
