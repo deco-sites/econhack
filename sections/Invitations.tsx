@@ -14,7 +14,6 @@ export interface Props {
 }
 
 export async function loader(props: Props, req: Request, ctx: AppContext) {
-  console.log(req.method);
   if (req.method === "POST") {
     const username = await req.formData().then((f) =>
       f.get("username")?.toString()
@@ -25,6 +24,29 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
     await ctx.invoke.site.actions.createInvitee({ username });
     props.invitees = await ctx.invoke.site.loaders["invitees-and-gifts"]();
 
+    return props;
+  }
+
+  if (req.method === "PATCH") {
+    const file = await req.formData().then((f) => f.get("lista")) as
+      | File
+      | null;
+
+    if (!file) return props;
+
+    const text = await file.text();
+    const invitees = text.split("\n").filter((c) => c.length).splice(1).map(
+      (line) => {
+        const [username, email] = line.split(";");
+        return { username, email };
+      },
+    );
+
+    for (const invitee of invitees) {
+      await ctx.invoke.site.actions.createInvitee(invitee);
+    }
+
+    props.invitees = await ctx.invoke.site.loaders.invitees();
     return props;
   }
 
@@ -154,22 +176,41 @@ export default function InvitationsSection(props: Props) {
           hx-post={useSection({ props })}
           hx-target="closest section"
           hx-swap="outerHTML"
-          class="flex gap-3 mx-auto justify-center mt-3"
+          class="flex flex-col items-center mt-3"
         >
-          <input
-            type="text"
-            placeholder="Nome"
-            name="username"
-            class="input input-bordered"
-          />
-          <button
-            type="submit"
-            class="btn btn-primary w-24 [.htmx-request_&]:disabled"
-          >
-            <span class="inline [.htmx-request_&]:hidden">Convidar</span>
-            <span class="w-4 h-4 loading loading-spinner hidden [.htmx-request_&]:inline">
-            </span>
-          </button>
+          <p>Crie um convite para:</p>
+          <div class="flex gap-3 mx-auto justify-center">
+            <input
+              type="text"
+              placeholder="Nome"
+              name="username"
+              class="input input-bordered"
+            />
+            <button
+              type="submit"
+              class="btn btn-primary w-24 [.htmx-request_&]:disabled"
+            >
+              <span class="inline [.htmx-request_&]:hidden">
+                Convidar
+              </span>
+              <span class="w-4 h-4 loading loading-spinner hidden [.htmx-request_&]:inline">
+              </span>
+            </button>
+          </div>
+        </form>
+        <form
+          class="flex flex-col items-center mt-3"
+          hx-patch={useSection({ props })}
+          hx-target="closest section"
+          hx-swap="outerHTML"
+          hx-trigger="submit"
+          hx-encoding="multipart/form-data"
+        >
+          <p>Ou suba uma lista de convidados:</p>
+          <div class="flex gap-3 mx-auto justify-center">
+            <input type="file" class="input" name="lista" />
+            <button class="btn btn-primary w-24">Enviar</button>
+          </div>
         </form>
       </div>
     </div>
