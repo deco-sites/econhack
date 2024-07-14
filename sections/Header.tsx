@@ -13,13 +13,13 @@ export interface Props {
 export default function Header(props: Props) {
   return (
     <>
-      <header class="w-full h-16 bg-base-200 flex items-center justify-end px-8">
+      <header class="w-full h-16 absolute top-0 flex items-center justify-end px-8">
         <div class="flex gap-4">
           <a href="/convidados">
-            <LetterIcon />
+            <LetterIcon className="fill-base-200" />
           </a>
           <a href="/minha-lista">
-            <MagnifyingGlassIcon />
+            <MagnifyingGlassIcon className="fill-base-200" />
           </a>
         </div>
       </header>
