@@ -17,13 +17,21 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 
     if (!username) return props;
 
-    const newUser = await ctx.invoke.site.actions.createInvitee({ username });
-    props.invitees.push(newUser);
+    await ctx.invoke.site.actions.createInvitee({ username });
+    props.invitees = await ctx.invoke.site.loaders.invitees();
+
     return props;
   }
 
   if (req.method === "DELETE") {
-    // TODO: Implement delete invitee
+    const id = new URL(req.url).searchParams.get("id");
+    if (!id) return props;
+
+    await ctx.invoke.site.actions.removeInvitee({
+      id: new URL(req.url).searchParams.get("id")!,
+    });
+
+    props.invitees = props.invitees.filter((invitee) => invitee.id !== id);
     return props;
   }
 
