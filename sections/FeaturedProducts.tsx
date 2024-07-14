@@ -45,6 +45,15 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
       throw new Error("Product not found");
     }
 
+    if (new URL(req.url).searchParams.get("action") === "remove") {
+      product.inList = false;
+      await ctx.invoke.site.actions.removeItem({
+        id: product.item.id,
+      });
+
+      return props;
+    }
+
     product.inList = true;
     await ctx.invoke.site.actions.addItem({
       item: product.item,
@@ -219,15 +228,19 @@ export default function Section(props: SectionProps<typeof loader>) {
               </button>
               {product.inList && (
                 <button
-                  class="absolute top-0 right-0 p-1 bg-white rounded-full shadow-black"
+                  class="absolute top-0 right-0 w-6 h-6 flex items-center justify-center p-1 bg-white rounded-full shadow-black [.htmx-request_&]:disabled"
                   hx-post={useSection<typeof Section>({
                     props: { ...props, state: { ...state, idx } },
+                    href: "?action=remove",
                   })}
                   hx-trigger="click"
                   hx-target="closest section"
                   hx-swap="outerHTML"
                 >
-                  <Icon id="Trash" width={20} height={20} />
+                  <span class="inline [.htmx-request_&]:hidden">
+                    <Icon id="Trash" width={20} height={20} />
+                  </span>
+                  <span class="loading loading-spinner hidden [.htmx-request_&]:inline" />
                 </button>
               )}
             </li>
