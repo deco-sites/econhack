@@ -34,7 +34,11 @@ export default function ItemsList({ items }: Props) {
         {items.map((item) => {
           const isReserved = item.reservedBy !== undefined;
           return (
-            <li class="relative flex flex-col w-48 p-3 border border-gray-200 rounded [.htmx-request_&]:hidden">
+            <li
+              class={`relative flex flex-col w-48 p-3 border border-gray-200 rounded [.htmx-request_&]:hidden ${
+                isReserved ? "opacity-40 pointer-events-none" : ""
+              }`}
+            >
               <a href={item.url} target="_blank">
                 <Image
                   src={item.image}
@@ -67,7 +71,7 @@ export default function ItemsList({ items }: Props) {
                   }`}
                   disabled={isReserved}
                 >
-                  {isReserved ? "Reservado" : "Reservar"}
+                  {isReserved ? "Presenteado" : "Presentear"}
                 </button>
               </form>
             </li>
