@@ -8,9 +8,20 @@ export interface Props {
   invitees: Invitee[];
 }
 
-export function loader(props: Props, req: Request, _ctx: AppContext) {
+export async function loader(props: Props, req: Request, ctx: AppContext) {
+  console.log(req.method);
   if (req.method === "POST") {
-    // TODO: Implement create invitee
+    const username = await req.formData().then((f) =>
+      f.get("username")?.toString()
+    );
+
+    console.log({ username });
+
+    if (!username) return props;
+
+    const newUser = await ctx.invoke.site.actions.createInvitee({ username });
+    console.log({ newUser });
+    props.invitees.push(newUser);
     return props;
   }
 
@@ -67,12 +78,17 @@ export default function Section(props: Props) {
           Faltando alguém?
         </h3>
         <form
-          hx-post="/invitees"
+          hx-post={useSection({ props })}
           hx-target="closest section"
           hx-swap="outerHTML"
           class="flex gap-3 mx-auto justify-center mt-3"
         >
-          <input type="text" placeholder="Nome" class="input input-bordered" />
+          <input
+            type="text"
+            placeholder="Nome"
+            name="username"
+            class="input input-bordered"
+          />
           <button
             type="submit"
             class="btn btn-primary w-24 [.htmx-request_&]:disabled"
