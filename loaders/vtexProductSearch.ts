@@ -12,6 +12,8 @@ export default async function loader(props: Props): Promise<Product[]> {
     queryString.append(key, encodeURIComponent(value));
   }
 
+  queryString.append("fq", "isAvailablePerSalesChannel_1:1");
+
   return await fetch(
     `${props.domain}/api/catalog_system/pub/products/search?${queryString}`,
   ).then((res) => res.json());
