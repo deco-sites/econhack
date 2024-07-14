@@ -20,7 +20,10 @@
     "base-100": "#ffffff",
     "secondary": "#000000",
     "tertiary": "#000000",
-    "neutral": "#000000"
+    "neutral": "#000000",
+    "success": "#5DC772",
+    "warning": "#C7C25D",
+    "error": "#C6453B"
   },
   "complementaryColors": {
     "base-200": "#ffffff",

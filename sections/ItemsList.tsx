@@ -74,7 +74,7 @@ export default function ItemsList(props: Props) {
                   : ""
               } ${
                 item.reservedBy === "YOU"
-                  ? "border-green-400 border-2 opacity-60"
+                  ? "border-success border-2 opacity-60"
                   : "border-gray-200"
               }`}
             >
