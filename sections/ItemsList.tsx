@@ -60,7 +60,7 @@ export default function ItemsList(props: Props) {
       <FlowerIcon className="fixed w-80 h-auto left-0 top-[35%]" />
       <FlowerIcon className="fixed w-80 h-auto right-0 top-[55%] rotate-180" />
       <h1 class="md:text-5xl text-2xl text-white font-bold text-center">
-        Lista de presentes
+        LISTA DE PRESENTES
       </h1>
       <ul class="gap-3 md:mt-8 max-w-[900px] grid md:grid-cols-4 grid-cols-2 bg-base-200 rounded-t-xl md:p-6 p-2">
         {props.items.map((item) => {
