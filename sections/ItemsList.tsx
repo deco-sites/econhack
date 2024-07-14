@@ -2,6 +2,7 @@ import type { Item } from "site/loaders/itemList.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { AppContext } from "site/apps/site.ts";
 import Image from "apps/website/components/Image.tsx";
+import { FlowerIcon } from "site/components/ui/icons/Flower.tsx";
 
 interface Props {
     itemId?: string;
@@ -20,16 +21,8 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 export default function ItemsList({ items = [] }: { items: Item[] }) {
     return (
         <div class="flex md:px-8 md:pt-6 pt-1 flex-col justify-end items-center bg-primary min-h-screen w-full">
-            <img
-                src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/55d28154-9738-40af-93d5-a4d2c53abc81"
-                alt="Uma flor em estilo minimalista"
-                class="fixed w-80 h-auto left-0 top-[35%]"
-            />
-            <img
-                src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/55d28154-9738-40af-93d5-a4d2c53abc81"
-                alt="Uma flor em estilo minimalista"
-                class="fixed w-80 h-auto right-0 top-[55%] rotate-180"
-            />
+            <FlowerIcon className="fixed w-80 h-auto left-0 top-[35%]" />
+            <FlowerIcon className="fixed w-80 h-auto right-0 top-[55%] rotate-180" />
             <h1 class="md:text-5xl text-2xl text-white font-bold text-center">
                 Lista de presentes
             </h1>
