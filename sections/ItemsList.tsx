@@ -19,7 +19,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
     ctx.response.headers.set("Set-Cookie", `user=${userId}`);
   }
 
-  const user = await ctx.invoke.site.loaders.authenticatedUser();
+  const user = await ctx.invoke.site.loaders.authenticatedUser({ userId });
   const itemId = url.searchParams.get("itemId");
 
   if (user) {
