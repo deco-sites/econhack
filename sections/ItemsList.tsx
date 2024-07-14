@@ -20,6 +20,16 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 export default function ItemsList({ items = [] }: { items: Item[] }) {
     return (
         <div class="flex px-8 pt-6 flex-col justify-end items-center bg-primary min-h-screen">
+            <img
+                src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/55d28154-9738-40af-93d5-a4d2c53abc81"
+                alt="Uma flor em estilo minimalista"
+                class="fixed w-80 h-auto left-0 top-[35%]"
+            />
+            <img
+                src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11581/55d28154-9738-40af-93d5-a4d2c53abc81"
+                alt="Uma flor em estilo minimalista"
+                class="fixed w-80 h-auto right-0 top-[55%] rotate-180"
+            />
             <h1 class="text-5xl text-white font-bold">
                 Lista de presentes
             </h1>
