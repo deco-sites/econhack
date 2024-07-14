@@ -1,0 +1,19 @@
+{
+  "name": "Convidados",
+  "path": "/convidados",
+  "sections": [
+    {
+      "__resolveType": "Header"
+    },
+    {
+      "__resolveType": "site/sections/Invitations.tsx",
+      "invitees": {
+        "__resolveType": "site/loaders/invitees.ts"
+      }
+    }
+  ],
+  "seo": {
+    "__resolveType": "website/sections/Seo/SeoV2.tsx"
+  },
+  "__resolveType": "website/pages/Page.tsx"
+}

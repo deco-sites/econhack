@@ -87,5 +87,11 @@
   "/.deco/blocks/Header.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Header.tsx"
+  },
+  "/.deco/blocks/pages-Convidados-152449.json": {
+    "name": "Convidados",
+    "path": "/convidados",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
   }
 }
