@@ -94,7 +94,7 @@ export default function InvitationsSection(props: Props) {
                         },
                       })}
                     >
-                      <GiftIcon className="h-6 w-6" />
+                      <GiftIcon className="h-6 w-6 fill-primary" />
                     </button>
                   )}
                   <Modal
@@ -125,8 +125,7 @@ export default function InvitationsSection(props: Props) {
                             {item.image
                               ? (
                                 <a
-                                  href={item
-                                    .url}
+                                  href={item.url}
                                   target="_blank"
                                 >
                                   <Image
@@ -144,17 +143,6 @@ export default function InvitationsSection(props: Props) {
                               {item.name}
                             </span>
                             <p>{item.message}</p>
-
-                            <p class="font-bold text-sm">
-                              {item.price
-                                .toLocaleString(
-                                  "pt-BR",
-                                  {
-                                    style: "currency",
-                                    currency: "BRL",
-                                  },
-                                )}
-                            </p>
                           </li>
                         ))}
                       </ul>
