@@ -12,7 +12,7 @@ export default function Section(props: Props) {
   return (
     <header>
       <button
-        class="absolute bottom-3 right-3 btn btn-accent"
+        class="fixed bottom-3 right-3 btn btn-accent"
         hx-get={useSection<typeof Section>({ props: { openList: true } })}
         hx-target="closest section"
         hx-swap="outerHTML"
