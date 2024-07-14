@@ -3,7 +3,8 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$$$$$$$0 from "./actions/addItem.ts";
-import * as $$$$$$$$$1 from "./actions/reserveItem.ts";
+import * as $$$$$$$$$1 from "./actions/removeItem.ts";
+import * as $$$$$$$$$2 from "./actions/reserveItem.ts";
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$1 from "./apps/deco/vtex.ts";
 import * as $$$$$$$$$$$2 from "./apps/site.ts";
@@ -41,7 +42,8 @@ const manifest = {
   },
   "actions": {
     "site/actions/addItem.ts": $$$$$$$$$0,
-    "site/actions/reserveItem.ts": $$$$$$$$$1,
+    "site/actions/removeItem.ts": $$$$$$$$$1,
+    "site/actions/reserveItem.ts": $$$$$$$$$2,
   },
   "apps": {
     "site/apps/deco/htmx.ts": $$$$$$$$$$$0,
