@@ -44,6 +44,8 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
     const url = new URL(req.url);
     const idx = Number(url.searchParams.get("idx"));
 
+    if (idx === undefined) return props;
+
     const product = state.products[idx];
 
     if (!product) {
@@ -103,7 +105,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 
   if (!state.products?.length) {
     let res = await ctx.invoke.site.loaders.vtexProductSearch({
-      domain: props.stores[state.storeIdx].url,
+      domain: props.stores[state.storeIdx ?? 0].url,
     });
 
     res = res.splice(0, 8);

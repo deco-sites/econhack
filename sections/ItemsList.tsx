@@ -24,8 +24,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
 
   if (user) {
     props.items = props.items.map((item) => {
-      console.log({ item, user });
-      if (item.reservedBy === user.id) {
+      if (item.reservedBy && item.reservedBy === user.id) {
         item.reservedBy = "YOU";
       }
 
